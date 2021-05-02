@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Form, Icon, Message,Segment} from 'semantic-ui-react';
-// import Link from "next/link";
+
 import catchErrors from "../utils/catchErrors";
 
 const INITIAL_USER = {
@@ -56,10 +56,20 @@ function SignUp(){
             fluid
             icon="user"
             iconPosition="left"
-            label="Name"
-            placeholder="Name"
+            label="First Name"
+            placeholder="First Name"
             name="name"
-            value={user.name}
+            value={user.firstName}
+            onChange={handleChange}
+            />
+            <Form.Input
+            fluid
+            icon="user"
+            iconPosition="left"
+            label="Last Name"
+            placeholder="Last Name"
+            name="name"
+            value={user.LastName}
             onChange={handleChange}
             />
             <Form.Input
@@ -82,6 +92,30 @@ function SignUp(){
             name="password"
             type="password"
             value={user.password}
+            onChange={handleChange}
+            />
+               <Form.Input
+            fluid
+            icon="lock"
+            iconPosition="left"
+            label="Repeat Password"
+            placeholder="Repeat Password"
+            name="Repeat password"
+            type="password"
+            value={user.password}
+            onChange={handleChange}
+            />
+               <Form.Input
+            fluid
+            control='input'
+            max={12}
+            icon="phone square"
+            iconPosition="left"
+            label="Phone Number"
+            placeholder="Phone Number"
+            name="phone"
+            type="number"
+            value={user.Phone}
             onChange={handleChange}
             />
             <Button

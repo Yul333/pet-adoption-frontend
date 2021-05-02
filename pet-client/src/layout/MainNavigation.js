@@ -62,6 +62,15 @@ function MainNavigation() {
 							account
 						</Menu.Item>
 
+            <Menu.Item
+							header
+							name="AddAPet"
+							onClick={(event) => (window.location.href = "/AddAPet")}
+						>
+							<Icon name="add square" />
+							Add A Pet
+						</Menu.Item>
+
 						<Menu.Item
 							header
 							name="Sign out"
@@ -75,7 +84,8 @@ function MainNavigation() {
 				{!user && (
 					<>
 						<Modal
-							centered={false}
+							centered={true}
+              style = {{position: "relative" }}
 							trigger={
 								<Menu.Item>
 									<Icon name="sign in" />

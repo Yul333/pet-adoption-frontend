@@ -23,26 +23,23 @@
 // 		</div>
 // 	);
 // }
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 // import {useEffect} from 'react'
 // import PetList from '../components/Index/PetList'
 // import axios from 'axios'
 import {
   Button,
-  Container,
+
   Divider,
   Grid,
   Header,
-  Icon,
-  Image,
-  List,
-  Menu,
-  Segment,
-  Sidebar,
-  Visibility,
- 
-} from 'semantic-ui-react'
 
+  Image,
+
+
+  Segment
+} from 'semantic-ui-react';
 
 function Home() {
 
@@ -53,6 +50,7 @@ function Home() {
       <Grid container stackable >
       
         <Grid.Row>
+          <h1> Welcome Friend!</h1>
         <Image src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7VuJjf1P5r5bQ3n6GpgV3zcL88Co2X1NLHA&usqp=CAU"} size='massive' />
                   <Grid.Column floated='center' width={16}>
             <Header as='h3' style={{ fontSize: '2em' }}>
@@ -72,7 +70,11 @@ function Home() {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column textAlign='center'>
-            <Button size='huge'>Search pets</Button>
+          <Link to="/searchAFriend">
+     <Button >
+        <p>Search pets</p>
+     </Button>
+ </Link>
           </Grid.Column>
         </Grid.Row>
       </Grid>
