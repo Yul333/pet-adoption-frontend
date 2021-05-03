@@ -1,40 +1,36 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { Button } from "semantic-ui-react";
+import PetInfo from '../components/Pet/PetInfo';
+import PetSummary from '../components/Pet/PetSummary';
 
 
 const Pet = () => {
+	const [petId, setPet] = useState([]);
 
-
-    const [pet, setPet] = useState([]);
-    
-    let urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('_id'); // "edit"
+	let urlParams = new URLSearchParams(window.location.search);
+	const id = urlParams.get("_id"); 
 
 	useEffect(() => {
 		loadPets();
 	}, []);
-
+    
 	async function loadPets() {
 		const url = `http://localhost:5050/api/pets/${id}`;
 		const response = await axios.get(url);
 		console.log(response);
-		setPet(response.data.pets);
+		setPet( response.data.pet);
 	}
+	
 
+	return (
+		
+		<>
+		<PetInfo {...petId}/>
+		<PetSummary {...petId}/>
+	
+		</>
+	);
+};
 
-
-    return (
-        <div>
-
-          
-
-            
-
-
-        
-  
-        </div>
-    )
-}
-
-export default Pet
+export default Pet;

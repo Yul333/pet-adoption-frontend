@@ -51,8 +51,9 @@ function Home() {
       
         <Grid.Row>
           <h1> Welcome Friend!</h1>
-        <Image src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ7VuJjf1P5r5bQ3n6GpgV3zcL88Co2X1NLHA&usqp=CAU"} size='massive' />
-                  <Grid.Column floated='center' width={16}>
+          <br/>
+        <Image src={"https://image.freepik.com/free-photo/cat-dog-resting-together-sofa-best-friends_389076-5.jpg"} size='large' />
+                  <Grid.Column floated='center' width={12}>
             <Header as='h3' style={{ fontSize: '2em' }}>
               Why it's a great idea to adopt a pet?
             </Header>
@@ -70,8 +71,8 @@ function Home() {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column textAlign='center'>
-          <Link to="/searchAFriend">
-     <Button >
+          <Link to="/SearchAFriend">
+     <Button color="orange" icon= "plus" widths="7" >
         <p>Search pets</p>
      </Button>
  </Link>

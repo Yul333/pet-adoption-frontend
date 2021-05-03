@@ -1,19 +1,7 @@
 import React from "react";
-// import { Input, Menu , Image, Icon, Container} from 'semantic-ui-react'
-// import logodog from '../../../static/logodog.png'
+import { Container, Icon, Image, Menu, Modal } from "semantic-ui-react";
+
 import LoginForm from "../components/LoginForm";
-import {
-	Menu,
-	Container,
-	Image,
-	Icon,
-	Modal,
-	centered,
-	open,
-	Form,
-	Input,
-	Checkbox,
-} from "semantic-ui-react";
 import SignUp from "../components/SignUp";
 
 function MainNavigation() {
@@ -36,7 +24,7 @@ function MainNavigation() {
 				<Menu.Item
 					header
 					name="Search A Friend"
-					onClick={(event) => (window.location.href = "/searchAFriend")}
+					onClick={(event) => (window.location.href = "/SearchAFriend")}
 				>
 					<Icon name="search" />
 					Search a friend
@@ -59,10 +47,10 @@ function MainNavigation() {
 							onClick={(event) => (window.location.href = "/account")}
 						>
 							<Icon name="user" />
-							account
+							Account
 						</Menu.Item>
 
-            <Menu.Item
+						<Menu.Item
 							header
 							name="AddAPet"
 							onClick={(event) => (window.location.href = "/AddAPet")}
@@ -85,7 +73,7 @@ function MainNavigation() {
 					<>
 						<Modal
 							centered={true}
-              style = {{position: "relative" }}
+							style={{ position: "relative" }}
 							trigger={
 								<Menu.Item>
 									<Icon name="sign in" />
@@ -99,8 +87,8 @@ function MainNavigation() {
 								{ key: "done", content: "Done", positive: true },
 							]}
 						/>
-						
-            	<Modal
+
+						<Modal
 							centered={false}
 							trigger={
 								<Menu.Item>

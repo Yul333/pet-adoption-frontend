@@ -13,6 +13,7 @@ import Home from "../pages/Home";
 import MyPets from "../pages/MyPets";
 import Pet from '../pages/Pet';
 import MainNavigation from "./MainNavigation";
+import SearchAFriend from '../components/SearchAFriend'
 
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
@@ -36,8 +37,8 @@ function Header() {
 				<Route path="/myPetsPage" exact>
 					<MyPets />
 				</Route>
-				<Route path="/searchAFriend" exact>
-        <MyPets />
+				<Route path="/SearchAFriend" exact>
+        <SearchAFriend />
 					{/* <searchAFriend /> */}
 				</Route>
 				<Route path="/account" exact>

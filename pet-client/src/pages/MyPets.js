@@ -43,3 +43,14 @@ export default MyPets;
 // 			"https://st.depositphotos.com/1011434/2672/i/950/depositphotos_26728105-stock-photo-labrador-dog-sitting-on-floor.jpg",
 // 	},
 // ];
+{/* <div>
+    <Button.Group widths='3'>
+    <Button content="Adopt" primary />
+    <Button color='pink'>Foster</Button>
+    <Button color='orange'>Save for later</Button>
+        </Button.Group>
+          </div>
+   <div>
+   
+    <Button color='grey'>Return</Button>
+   </div> */}
