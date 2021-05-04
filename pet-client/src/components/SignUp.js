@@ -1,72 +1,46 @@
-import {useState, useRef} from "react";
+import { useState } from "react";
 import { Button, Form, Icon, Message, Segment } from "semantic-ui-react";
 import { signUp } from "../lib/api";
 
-import catchErrors from "../utils/catchErrors";
-
-// const INITIAL_USER = {
-// 	FirstName: "",
-// 	LastName: "",
-// 	email: "",
-// 	password: "",
-// 	repeatedPass: "",
-// 	phone: "",
-// };
+// import catchErrors from "../utils/catchErrors";
 
 function SignUp() {
-	// const [user, setUser] = useState(INITIAL_USER);
-	const [disabled, setDisabled] = useState(true);
+	// const [disabled, setDisabled] = useState(true);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState("");
-  const [firstName, setFirstName] = useState('')
-  const [lastName, setLastName] = useState('')
-  // const firstNameRef = useRef();
-  // const lastNameRef = useRef();
-  // const emailRef = useRef();
-  
-  const [password , setPassword] = useState('')
- const [repeatPass, setRepeatPass] = useState('')
-  // const phoneRef = useRef();
-
-	// React.useEffect(() => {
-	// 	const isUser = Object.values(user).every((el) => Boolean(el));
-	// 	isUser ? setDisabled(false) : setDisabled(true);
-	// }, [user]);
-
-	// function handleChange(event) {
-	// 	const { name, value } = event.target;
-	// 	setUser((prevState) => ({ ...prevState, [name]: value }));
-	// }
-  
-  // if {user.password ===! user.repeatedPass
-  //         				<Message negative>
-	// 						<Message.Header>Password Doesn't Much! </Message.Header>
-	// 					</Message>
-  // }
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [repeatPass, setRepeatPass] = useState("");
+	const [phoneNumber, setPhoneNumber] = useState("");
 
 	async function handleSubmit(event) {
 		event.preventDefault();
-    if (password !== repeatPass){
-      setError ("Pass not match")
-      return
-
-    }
-    const userInfo = {
-      firstName,
-      lastName,
-      email,
-      password,
-      phoneNumber,
-    }
+		if (password !== repeatPass) {
+			setError(
+				<Message negative>
+					<Message.Header>Password Doesn't Much! </Message.Header>
+				</Message>
+			);
+			return;
+		}
+		const userInfo = {
+			firstName,
+			lastName,
+			email,
+			password,
+            // repeatPass,
+			phoneNumber,
+		};
 
 		try {
 			setLoading(true);
 			setError("");
-			const {user}  = await signUp(userInfo)
-      console.log(user)
-		
+			const user  = await signUp(userInfo);
+			console.log(user);
 		} catch (error) {
-			catchErrors(error, setError);
+			 setError("Something wrong...");
 		} finally {
 			setLoading(false);
 		}
@@ -91,9 +65,8 @@ function SignUp() {
 						label="First Name"
 						placeholder="First Name"
 						name="name"
-            onChange={(event)=>setFirstName(event.target.value)}
-            
-            />
+						onChange={(event) => setFirstName(event.target.value)}
+					/>
 					<Form.Input
 						fluid
 						icon="user"
@@ -101,9 +74,7 @@ function SignUp() {
 						label="Last Name"
 						placeholder="Last Name"
 						name="name"
-            
-            onChange={(event)=>setLastName(event.target.value)}
-						
+						onChange={(event) => setLastName(event.target.value)}
 					/>
 					<Form.Input
 						fluid
@@ -112,9 +83,8 @@ function SignUp() {
 						label="Email"
 						placeholder="Email"
 						name="email"
-            inputRef={emailRef}
 						type="email"
-					
+						onChange={(event) => setEmail(event.target.value)}
 					/>
 					<Form.Input
 						fluid
@@ -123,13 +93,10 @@ function SignUp() {
 						label="Password"
 						placeholder="Password"
 						name="password"
-            inputRef={passwordRef}
 						type="password"
-					
+						onChange={(event) => setPassword(event.target.value)}
 					/>
-				
-          
-      		
+
 					<Form.Input
 						fluid
 						icon="lock"
@@ -137,13 +104,10 @@ function SignUp() {
 						label="Repeat Password"
 						placeholder="Repeat Password"
 						name="Repeat password"
-            inputRef={repeatedPassRef}
 						type="password"
-				
+						onChange={(event) => setRepeatPass(event.target.value)}
 					/>
 
-
-            
 					<Form.Input
 						fluid
 						control="input"
@@ -153,17 +117,10 @@ function SignUp() {
 						label="Phone Number"
 						placeholder="Phone Number"
 						name="phone"
-            inputRef={phoneRef}
 						type="number"
-						
+						onChange={(event) => setPhoneNumber(event.target.value)}
 					/>
-					<Button
-		
-						icon="signup"
-						type="submit"
-						color="orange"
-						content="Signup"
-					/>
+					<Button icon="signup" type="submit" color="orange" content="Signup" />
 				</Segment>
 			</Form>
 			<Message attached="bottom" warning>

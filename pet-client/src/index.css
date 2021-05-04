@@ -12,14 +12,14 @@ code {
     monospace;
 } */
 :root {
-  --bodyBg: #d1e6a2;
-  --menuBg: #966bcf;
+  --bodyBg: #e6a2b9;
+  --menuBg: #6bcf81;
   --progressBar: #bedb54;
 }
 
 body {
-  background: var(--bodyBg);
-  color:#e6a2cc
+  background: var(--bodyBg)
+ 
   
 }
 
