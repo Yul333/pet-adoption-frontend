@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form, Icon, Message, Segment } from "semantic-ui-react";
 
-import catchErrors from "../utils/catchErrors";
+
 
 const INITIAL_USER = {
 	FirstName: "",
@@ -37,7 +37,7 @@ function Account() {
 			console.log(user);
 	
 		} catch (error) {
-			catchErrors(error, setError);
+			setError("OOOOPs");
 		} finally {
 			setLoading(false);
 		}

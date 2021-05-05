@@ -1,15 +1,28 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Container, Icon, Image, Menu, Modal } from "semantic-ui-react";
 
 import LoginForm from "../components/LoginForm";
 import SignUp from "../components/SignUp";
 
-function MainNavigation() {
-	const user = false;
-	// const router = useRouter()
+import { setUserTokenContext} from '../context/UserAuth'
+
+import localforage from 'localforage';
+
+
+function MainNavigation(props) {
+
+	function  dropLocalForageCache () {
+		localforage.clear()
+		window.location.replace("http://localhost:3000/")
+	  }
+	
+	// const user = localStorage.getItem("email") || ''; // const router = useRouter()
 	const [open, setOpen] = React.useState(false);
+	const {user} = useContext(setUserTokenContext);
+
 
 	return (
+		
 		<Menu stackable fluid id="menu">
 			<Container text>
 				<Image avatar style={{ marginRight: "1em" }} />
@@ -23,11 +36,19 @@ function MainNavigation() {
 				</Menu.Item>
 				<Menu.Item
 					header
-					name="Search A Friend"
+					name="All Pets"
+					onClick={(event) => (window.location.href = "/AllPets")}
+				>
+					<Icon name="heart outline" />
+					All Pets
+				</Menu.Item>
+				<Menu.Item
+					header
+					name="search"
 					onClick={(event) => (window.location.href = "/SearchAFriend")}
 				>
 					<Icon name="search" />
-					Search a friend
+					Search A Friend
 				</Menu.Item>
 
 				{user && (
@@ -62,7 +83,11 @@ function MainNavigation() {
 						<Menu.Item
 							header
 							name="Sign out"
-							onClick={(event) => (window.location.href = "/signout")}
+							onClick={dropLocalForageCache}
+								// => {
+								// localStorage.setItem("email", '')								// window.location.href = "/signout"
+							// }
+							// }
 						>
 							<Icon name="sign out" />
 							logout
@@ -71,7 +96,7 @@ function MainNavigation() {
 				)}
 				{!user && (
 					<>
-						<Modal
+						{/* <Modal
 							centered={true}
 							style={{ position: "relative" }}
 							trigger={
@@ -86,9 +111,12 @@ function MainNavigation() {
 								"Cancel",
 								{ key: "done", content: "Done", positive: true },
 							]}
-						/>
+						/> */}
+						<LoginForm />
 
-						<Modal
+						<SignUp />
+
+						{/* <Modal
 							centered={false}
 							trigger={
 								<Menu.Item>
@@ -102,7 +130,7 @@ function MainNavigation() {
 								"Cancel",
 								{ key: "done", content: "Done", positive: true },
 							]}
-						/>
+						/> */}
 					</>
 				)}
 			</Container>

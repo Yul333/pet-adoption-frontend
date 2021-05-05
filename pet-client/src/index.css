@@ -13,7 +13,7 @@ code {
 } */
 :root {
   --bodyBg: #e6a2b9;
-  --menuBg: #6bcf81;
+  --menuBg: #73da89;
   --progressBar: #bedb54;
 }
 
@@ -25,6 +25,7 @@ body {
 
 #menu {
   background: var(--menuBg);
+ 
 }
 
 
