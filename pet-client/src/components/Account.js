@@ -1,22 +1,61 @@
 import React from "react";
-import { Button, Form, Icon, Message, Segment } from "semantic-ui-react";
-
-
+import { Button, Form, Grid, Message, Segment } from "semantic-ui-react";
+import { editAccount } from "../lib/api";
 
 const INITIAL_USER = {
 	FirstName: "",
 	LastName: "",
 	email: "",
 	password: "",
-	repeatedPass: "",
+
 	phone: "",
 };
 
+
+
 function Account() {
+
 	const [user, setUser] = React.useState(INITIAL_USER);
 	const [disabled, setDisabled] = React.useState(true);
 	const [loading, setLoading] = React.useState(false);
 	const [error, setError] = React.useState("");
+
+	const [firstName, setFirstName] =  React.useState("");
+	const [lastName, setLastName] =  React.useState("");
+	const [email, setEmail] =  React.useState("");
+	const [password, setPassword] =  React.useState("");
+	const [bio, setBio] =  React.useState("");
+	const [phoneNumber, setPhoneNumber] =  React.useState("");
+
+	async function handleSubmit(event) {
+				event.preventDefault();
+
+				const userInfo = {
+					firstName,
+					lastName,
+					email,
+					password,
+					phoneNumber,
+					bio,
+				};
+		
+				try {
+					console.log("start loading");
+					setLoading(true);
+					setError("");
+					console.log("start sending");
+					const user = await editAccount(userInfo);
+					console.log("finish sending");
+					console.log(user);
+					setLoading(false);
+				
+				} catch (error) {
+					setError("Something wrong...");
+				} finally {
+					setLoading(false);
+				}
+			}
+		
 
 	React.useEffect(() => {
 		const isUser = Object.values(user).every((el) => Boolean(el));
@@ -28,20 +67,19 @@ function Account() {
 		setUser((prevState) => ({ ...prevState, [name]: value }));
 	}
 
-	async function handleSubmit(event) {
-		event.preventDefault();
+	// async function handleSubmit(event) {
+	// 	event.preventDefault();
 
-		try {
-			setLoading(true);
-			setError("");
-			console.log(user);
-	
-		} catch (error) {
-			setError("OOOOPs");
-		} finally {
-			setLoading(false);
-		}
-	}
+	// 	try {
+	// 		setLoading(true);
+	// 		setError("");
+	// 		console.log(user);
+	// 	} catch (error) {
+	// 		setError("OOOOPs");
+	// 	} finally {
+	// 		setLoading(false);
+	// 	}
+	// }
 
 	return (
 		<>
@@ -54,7 +92,9 @@ function Account() {
 			/>
 			<Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit}>
 				<Message error header="Oops!" content={error} />
-				<Segment>
+				<Segment style={{ padding: "3em 0em" }} vertical>
+					<Grid  stackable>
+						<Grid.Column width={13}>
 					<Form.Input
 						fluid
 						icon="user"
@@ -72,7 +112,7 @@ function Account() {
 						label="Last Name"
 						placeholder="Last Name"
 						name="name"
-						value={user.LastName}
+						value={user.lastName}
 						onChange={handleChange}
 					/>
 					<Form.Input
@@ -111,7 +151,7 @@ function Account() {
 						value={user.Phone}
 						onChange={handleChange}
 					/>
-          <Form.Input
+					<Form.Input
 						fluid
 						icon="address card"
 						iconPosition="left"
@@ -122,12 +162,14 @@ function Account() {
 						onChange={handleChange}
 					/>
 					<Button
-						disabled={disabled || loading}
+						// disabled={disabled || loading}
 						icon="signup"
 						type="submit"
 						color="orange"
 						content="Save Changes"
 					/>
+					</Grid.Column>
+					</Grid>
 				</Segment>
 			</Form>
 		</>

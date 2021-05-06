@@ -53,7 +53,7 @@ function SignUp() {
 			console.log(user);
 			setLoading(false);
 			setOpen(false);
-			localStorage.setItem("email", user.email);
+			localStorage.set("email", user.email);
 			history.push("/myPetsPage");
 		} catch (error) {
 			setError("Something wrong...");

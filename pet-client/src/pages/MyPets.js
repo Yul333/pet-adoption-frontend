@@ -1,24 +1,35 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import PetList from "../components/PetList";
+import MyPetsList from "../components/MyPetsList";
+import PetList from "../components/MyPetsList";
+import { setUserTokenContext } from "../context/UserAuth";
+import { getMyPets } from "../lib/api";
 
-function MyPets() {
+const MyPets = () => {
+
+	
 	const [pets, setPets] = useState([]);
-
-	useEffect(() => {
-		loadPets();
-	}, []);
+	
+	const {user}  = useContext(setUserTokenContext);
+	
+	useEffect(() =>  {
+		{user && loadPets();}
+   }, [user]);
 
 	async function loadPets() {
-		const url = "http://localhost:5050/api/pets";
+		const url = `http://localhost:5050/api/pets/myPets/${user._id}`;
 		const response = await axios.get(url);
 		console.log(response);
+		console.log(user.firstName)
 		setPets(response.data);
 	}
 
 	return (
+		
 		<div>
-			<PetList pets={pets} />
+			{user && <h1> {`Welcome, ${user.firstName}!`}</h1>}
+			
+		     <PetList pets={pets} />
 		</div>
 	);
 }

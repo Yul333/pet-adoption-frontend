@@ -1,19 +1,15 @@
-import React, {useContext, useState} from "react";
-import { setUserTokenContext } from '../context/UserAuth'
-
+import React, { useContext } from "react";
 import {
 	Button,
 	Form,
 	Icon,
-	Message,
-	Segment,
-	Modal,
 	Menu,
- 
+	Message,
+	Modal,
+	Segment,
 } from "semantic-ui-react";
-import { login, loginInfo } from "../lib/api";
-
-import axios from 'axios';
+import { setUserTokenContext } from "../context/UserAuth";
+import { login } from "../lib/api";
 
 const INITIAL_USER = {
 	email: "",
@@ -21,7 +17,7 @@ const INITIAL_USER = {
 };
 
 function LoginForm() {
-  const {setUserToken} = useContext(setUserTokenContext)
+	const { setUserToken } = useContext(setUserTokenContext);
 
 	const [userInfo, setUserInfo] = React.useState(INITIAL_USER);
 	const [disabled, setDisabled] = React.useState(true);
@@ -34,28 +30,6 @@ function LoginForm() {
 		isUser ? setDisabled(false) : setDisabled(true);
 	}, [userInfo]);
 
-
-  // const handlelogin = async event => {
-  //   event.preventDefault()
-  //   const loginUser ={
-  //     email,
-  //     password
-  //   }
-	 
-	  // axios
-		//   .post('http://localhost:5500/api/users/login', user)
-		//   .then(response => {
-    //     setUserToken(response.data.token, response.data.user)
-		// 	  console.log(response)
-    //     window.location.replace("http://localhost:3000/")
-		//   })
-		//   .catch(error => {
-		// 	  console.log(error)
-		//   })
-  
-  // }
-
-
 	function handleChange(event) {
 		const { name, value } = event.target;
 		setUserInfo((prevState) => ({ ...prevState, [name]: value }));
@@ -63,31 +37,23 @@ function LoginForm() {
 
 	async function handleSubmit(event) {
 		event.preventDefault();
-		setError("")
+		setError("");
 		setLoading(true);
 
-   
-     
-    if( !userInfo.email || !userInfo.password ){
-      setError("No email and/or password")
-     
-           return
-     
-  
-    }
-    
+		if (!userInfo.email || !userInfo.password) {
+			setError("No email and/or password");
+
+			return;
+		}
 
 		try {
-			
-			const {token, user} = await login(userInfo)
-			setUserToken (token, user)
-			window.location.replace("http://localhost:3000/")
+			const { token, user } = await login(userInfo);
+			setUserToken(token, user);
+			window.location.replace("http://localhost:3000/");
 
- 
-      setOpen(false)
+			setOpen(false);
 		} catch (error) {
-			
-      setError("Email and password do not match!")
+			setError("Email and password do not match!");
 		} finally {
 			setLoading(false);
 		}
@@ -95,11 +61,10 @@ function LoginForm() {
 
 	return (
 		<>
-			<Modal 
-      size="huge"
-      centered={true}
-      style={{ position: "relative" }}
-
+			<Modal
+				size="huge"
+				centered={true}
+				style={{ position: "relative" }}
 				as={Form}
 				onSubmit={(e) => handleSubmit(e)}
 				onClose={() => setOpen(false)}
@@ -121,8 +86,7 @@ function LoginForm() {
 						content="Log in with email and password"
 						color="blue"
 					/>
-					{/* <Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit}> */}
-					{/* {error && <Message error header="Oops!" content={error} />} */}
+
 					{error && <div>{error}</div>}
 					<Segment>
 						<Form.Input
@@ -147,16 +111,8 @@ function LoginForm() {
 							value={userInfo.password}
 							onChange={handleChange}
 						/>
-
-						{/* <Button
-							disabled={disabled || loading}
-							icon="sign in"
-							type="submit"
-							color="orange"
-							content="Login"
-						/> */}
 					</Segment>
-					{/* </Form> */}
+
 					<Message attached="bottom" warning>
 						<Icon name="help" />
 						New user?{" "}
@@ -167,15 +123,11 @@ function LoginForm() {
 					</Message>
 				</Modal.Content>
 				<Modal.Actions>
-					{/* <Button color="black" onClick={() => setOpen(false)}>
-						Nope
-					</Button> */}
 					<Button
 						content="Sign me in!"
 						type="submit"
 						labelPosition="center"
 						icon="sign in"
-						// onClick={() => setOpen(false)}
 						positive
 					/>
 				</Modal.Actions>

@@ -1,15 +1,14 @@
 import { Card, Grid, Image,  Segment } from "semantic-ui-react";
 
-function PetList({ pets }) {
-	// const { Type, Name, AdoptionStatus, Picture, Height, Weight, Color, Bio, Hypoallergenic, DietaryRestrictions, Breed } = pet
+function MyPetsList({ pets }) {
+	
 	function mapPetsToItems(petsArr = []) {
-;
+
 
 		return petsArr.map(pet =>({
 		  header: pet.Name,
 		  image: pet.Picture,
 		  meta: pet.AdoptionStatus,
-		  // meta: pet.Type,
 		  color: 'teal',
 		  fluid: true,
 		  key: pet._id,
@@ -37,4 +36,4 @@ function PetList({ pets }) {
 	);
 }
 
-export default PetList;
+export default MyPetsList;
