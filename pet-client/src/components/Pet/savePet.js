@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
 import { Input } from "semantic-ui-react";
-// import { useRouter } from "next/router";
+// // import { useRouter } from "next/router";
 import axios from "axios";
 import baseUrl from "../../lib/api";
-// import catchErrors from "../../utils/catchErrors";
-// import cookie from "js-cookie";
+// // import catchErrors from "../../utils/catchErrors";
+// // import cookie from "js-cookie";
 
-import { setUserTokenContext } from "../context/UserAuth";
+import { setUserTokenContext } from "../../context/UserAuth";
 
-function AddProductToCart({ user, productId }) {
+
+function SavePet({ user, productId }) {
 //   const [quantity, setQuantity] = React.useState(1);
 const {token, user: userFromCtx } = useContext(setUserTokenContext);
   const [loading, setLoading] = React.useState(false);
@@ -25,7 +26,7 @@ const {token, user: userFromCtx } = useContext(setUserTokenContext);
     };
   }, [success]);
 
-  async function handleAddProductToCart() {
+  async function handleSavePet() {
     try {
       setLoading(true);
       const url = `http://localhost:5050/api/pets/myPets/${user._id}`;
@@ -63,17 +64,17 @@ const {token, user: userFromCtx } = useContext(setUserTokenContext);
               icon: "plus cart",
               loading,
               disabled: loading,
-              onClick: handleAddProductToCart
+              onClick: handleSavePet
             }
-        //   : {
-        //       color: "blue",
-        //       content: "Sign Up To Purchase",
-        //       icon: "signup",
-        //       onClick: () => router.push("/signup")
-        //     }
+          : {
+              color: "blue",
+              content: "Sign Up To Purchase",
+              icon: "signup",
+            //   onClick: () => router.push("/signup")
+            }
       }
     />
   );
 }
 
-export default AddProductToCart;
+export default SavePet;
