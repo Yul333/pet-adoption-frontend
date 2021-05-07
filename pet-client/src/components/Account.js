@@ -1,50 +1,68 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Form, Grid, Message, Segment } from "semantic-ui-react";
 import { editAccount } from "../lib/api";
+import { setUserTokenContext } from "../context/UserAuth";
+import axios from "axios";
 
 const INITIAL_USER = {
-	FirstName: "",
-	LastName: "",
-	email: "",
+	firstName: "",
+	lastName: "",
+	// email: "",
 	password: "",
 
-	phone: "",
+	phoneNumber: "",
+	bio:"",
 };
 
 
 
 function Account() {
 
-	const [user, setUser] = React.useState(INITIAL_USER);
+	const {token, user: userFromCtx } = useContext(setUserTokenContext);
+
+	console.log(userFromCtx)
+
+	const [user, setUser] = React.useState({...INITIAL_USER, ...userFromCtx});
+
 	const [disabled, setDisabled] = React.useState(true);
 	const [loading, setLoading] = React.useState(false);
 	const [error, setError] = React.useState("");
 
-	const [firstName, setFirstName] =  React.useState("");
-	const [lastName, setLastName] =  React.useState("");
-	const [email, setEmail] =  React.useState("");
-	const [password, setPassword] =  React.useState("");
-	const [bio, setBio] =  React.useState("");
-	const [phoneNumber, setPhoneNumber] =  React.useState("");
+
+	// const [firstName, setFirstName] =  React.useState("");
+	// const [lastName, setLastName] =  React.useState("");
+	// const [email, setEmail] =  React.useState("");
+	// const [password, setPassword] =  React.useState("");
+	// const [bio, setBio] =  React.useState("");
+	// const [phoneNumber, setPhoneNumber] =  React.useState("");
 
 	async function handleSubmit(event) {
 				event.preventDefault();
-
+	// 			let urlParams = new URLSearchParams(window.location.search);
+	// const id = urlParams.get("_id");
+				 
+	// 				const url = `http://localhost:5050/api/users/${id}`;
+	// 				const response = await axios.put(url, id);
+	// 				console.log(response);
+			
+	// 				window.location.replace("http://localhost:3000/pets");
+				
 				const userInfo = {
-					firstName,
-					lastName,
-					email,
-					password,
-					phoneNumber,
-					bio,
+					firstName: user.firstName,
+					lastName: user.lastName,
+					// email:,
+					password: user.password,
+					phoneNumber:user.phoneNumber,
+					bio:user.bio,
 				};
-		
+		console.log(user)
+		console.log(userFromCtx)
 				try {
 					console.log("start loading");
 					setLoading(true);
 					setError("");
 					console.log("start sending");
-					const user = await editAccount(userInfo);
+					const user = await editAccount(userFromCtx._id, userInfo, token);
 					console.log("finish sending");
 					console.log(user);
 					setLoading(false);
@@ -57,14 +75,17 @@ function Account() {
 			}
 		
 
-	React.useEffect(() => {
-		const isUser = Object.values(user).every((el) => Boolean(el));
-		isUser ? setDisabled(false) : setDisabled(true);
-	}, [user]);
+	// React.useEffect(() => {
+	// 	if (user) {
+	// 		let isUser = Object.values(user).every((el) => Boolean(el));
+	// 		isUser ? setDisabled(false) : setDisabled(true);
+	// 	}
+	// }, [user]);
 
 	function handleChange(event) {
 		const { name, value } = event.target;
-		setUser((prevState) => ({ ...prevState, [name]: value }));
+		console.log(name, value)
+		setUser({ ...user, [name]: value });
 	}
 
 	// async function handleSubmit(event) {
@@ -80,7 +101,9 @@ function Account() {
 	// 		setLoading(false);
 	// 	}
 	// }
-
+	// if (!user || !user.firstName) {
+	// 	return <>Loading...</>;
+	// }
 	return (
 		<>
 			<Message
@@ -101,8 +124,8 @@ function Account() {
 						iconPosition="left"
 						label="First Name"
 						placeholder="First Name"
-						name="name"
-						value={user.firstName}
+						name="firstName"
+						defaultValue={user.firstName}
 						onChange={handleChange}
 					/>
 					<Form.Input
@@ -111,11 +134,11 @@ function Account() {
 						iconPosition="left"
 						label="Last Name"
 						placeholder="Last Name"
-						name="name"
-						value={user.lastName}
+						name="lastName"
+						defaultValue={user.lastName}
 						onChange={handleChange}
 					/>
-					<Form.Input
+					{/* <Form.Input
 						fluid
 						icon="envelope"
 						iconPosition="left"
@@ -125,7 +148,7 @@ function Account() {
 						type="email"
 						value={user.email}
 						onChange={handleChange}
-					/>
+					/> */}
 					<Form.Input
 						fluid
 						icon="lock"
@@ -134,21 +157,21 @@ function Account() {
 						placeholder="Password"
 						name="password"
 						type="password"
-						value={user.password}
+						defaultValue={user.password}
 						onChange={handleChange}
 					/>
 
 					<Form.Input
 						fluid
 						control="input"
-						max={12}
+						// max={12}
 						icon="phone square"
 						iconPosition="left"
 						label="Phone Number"
 						placeholder="Phone Number"
-						name="phone"
+						name="phoneNumber"
 						type="number"
-						value={user.Phone}
+						defaultValue={user.phoneNumber}
 						onChange={handleChange}
 					/>
 					<Form.Input
@@ -157,8 +180,9 @@ function Account() {
 						iconPosition="left"
 						label="Short Bio"
 						placeholder="Short Bio"
-						name="Short Bio"
+						name="bio"
 						type="Short Bio"
+						defaultValue={user.bio}
 						onChange={handleChange}
 					/>
 					<Button

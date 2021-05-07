@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { Button, Checkbox, Form, Container} from 'semantic-ui-react'
 
 import axios from 'axios'
+import { useAuth } from '../context/UserAuth'
 
 //Pet details: Type (dog, cat), Name, Adoption Status, Picture, Height, Weight, Color, Bio, Hypoallergenic (yes/no), dietary restrictions, AdoptionStatus of animal (Poodle, Siamese) 
 
 
 
 class AddAPet extends Component {
+	
 	constructor(props) {
 		super(props)
 
@@ -29,6 +31,7 @@ class AddAPet extends Component {
 	}
 
 	changeHandler = e => {
+		// const auth = useAuth();
 		this.setState({ [e.target.name]: e.target.value })
 	}
 
