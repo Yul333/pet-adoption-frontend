@@ -1,31 +1,32 @@
-import React, {useContext} from "react";
-import { Container, Icon, Image, Menu, Modal } from "semantic-ui-react";
-
+import localforage from "localforage";
+import React, { useContext } from "react";
+import { Container, Icon, Image, Menu } from "semantic-ui-react";
 import LoginForm from "../components/LoginForm";
 import SignUp from "../components/SignUp";
-
-import { setUserTokenContext} from '../context/UserAuth'
-
-import localforage from 'localforage';
-
+import { setUserTokenContext } from "../context/UserAuth";
+import petcute3 from "../static/petcute.png";
 
 function MainNavigation(props) {
+	function dropLocalForageCache() {
+		localforage.clear();
+		window.location.replace("http://localhost:3000/");
+	}
 
-	function  dropLocalForageCache () {
-		localforage.clear()
-		window.location.replace("http://localhost:3000/")
-	  }
-	
-	// const user = localStorage.getItem("email") || ''; // const router = useRouter()
 	const [open, setOpen] = React.useState(false);
-	const {user} = useContext(setUserTokenContext);
-
+	const { user } = useContext(setUserTokenContext);
 
 	return (
-		
 		<Menu stackable fluid id="menu">
 			<Container text>
-				<Image avatar style={{ marginRight: "1em" }} />
+				<Image
+					avatar
+					src={petcute3}
+					style={{
+						marginRight: "3em",
+						marginBottom: "0.7em",
+						marginTop: "0.5em",
+					}}
+				/>
 
 				<Menu.Item
 					header
@@ -80,15 +81,7 @@ function MainNavigation(props) {
 							Add A Pet
 						</Menu.Item>
 
-						<Menu.Item
-							header
-							name="Sign out"
-							onClick={dropLocalForageCache}
-								// => {
-								// localStorage.setItem("email", '')								// window.location.href = "/signout"
-							// }
-							// }
-						>
+						<Menu.Item header name="Sign out" onClick={dropLocalForageCache}>
 							<Icon name="sign out" />
 							logout
 						</Menu.Item>
@@ -96,41 +89,9 @@ function MainNavigation(props) {
 				)}
 				{!user && (
 					<>
-						{/* <Modal
-							centered={true}
-							style={{ position: "relative" }}
-							trigger={
-								<Menu.Item>
-									<Icon name="sign in" />
-									Login
-								</Menu.Item>
-							}
-							header="Welcome Back Friend To-Be :)"
-							content={<LoginForm />}
-							actions={[
-								"Cancel",
-								{ key: "done", content: "Done", positive: true },
-							]}
-						/> */}
 						<LoginForm />
 
 						<SignUp />
-
-						{/* <Modal
-							centered={false}
-							trigger={
-								<Menu.Item>
-									<Icon name="signup" />
-									Sign Up
-								</Menu.Item>
-							}
-							header="Sign Up For A New Friend"
-							content={<SignUp />}
-							actions={[
-								"Cancel",
-								{ key: "done", content: "Done", positive: true },
-							]}
-						/> */}
 					</>
 				)}
 			</Container>

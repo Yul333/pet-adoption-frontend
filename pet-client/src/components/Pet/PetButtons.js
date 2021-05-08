@@ -11,7 +11,7 @@ function PetButtons() {
 	const id = urlParams.get("_id");
 	const [saveModal, setSaveModal] = React.useState(false);
 	const [deleteModal, setDeleteModal] = React.useState(false);
-	const [unSave, setUnSave] = useState(false)
+	const [unSaveModal, setUnSaveModal] = React.useState(false)
 
 	async function handleDelete() {
 		const url = `http://localhost:5050/api/pets/${id}`;
@@ -21,15 +21,7 @@ function PetButtons() {
 
 		window.location.replace("http://localhost:3000/pets");
 	}
-	// React.useEffect(() => {
-	// 	let timeout;
-	// 	// if (success) {
-	// 	//   timeout = setTimeout(() => setSuccess(false), 3000);
-	// 	// }
-	// 	return () => {
-	// 	  clearTimeout(timeout);
-	// 	};
-	//   }, [success]);
+	
 
 	async function handleSavePet() {
 		const url = `http://localhost:5050/api/pets/myPets/${id}`;
@@ -49,18 +41,15 @@ function PetButtons() {
 		});
 		console.log(response);
 
-		window.location.replace("http://localhost:3000/myPetsPage");
+		window.location.replace("http://localhost:3000/AllPets");
 	}
 
 	return (
 		<>
 			<div>
-				<Button.Group widths="7">
-					<Button content="Adopt" primary />
-					<Button color="pink">Foster</Button>
-
+			
 					<Button
-						// icon="trash alternate outline"
+					
 						color="orange"
 						content="Save Pet"
 						onClick={() => setSaveModal(true)}
@@ -82,13 +71,21 @@ function PetButtons() {
 						</Modal.Actions>
 					</Modal>
 
-					<Modal open={setUnSave} dimmer="blurring">
+
+<Button
+
+						color="grey"
+						content="UnSave Pet"
+						onClick={() => setUnSaveModal(true)}
+					/>
+					<Modal open={unSaveModal} dimmer="blurring">
 						<Modal.Header>Confirm UnSave Pet</Modal.Header>
 						<Modal.Content>
-							<p>Are you sure you want to Unsave this pet?</p>
+							<p>Are you sure you want to remove this pet?</p>
 						</Modal.Content>
+
 						<Modal.Actions>
-							<Button onClick={() => setUnSave(false)} content="Cancel" />
+							<Button onClick={() => setUnSaveModal(false)} content="Cancel" />
 							<Button
 								positive
 								icon="save"
@@ -98,13 +95,8 @@ function PetButtons() {
 							/>
 						</Modal.Actions>
 					</Modal>
-					{/* <Button color="orange" icon="plus">
-						Save Pet
-					</Button> */}
-				</Button.Group>
-				<Button color="purple">Unsave</Button>
-				<div>
 					<Button
+					floated ="right"
 						icon="trash alternate outline"
 						color="red"
 						content="Delete Pet"
@@ -116,7 +108,7 @@ function PetButtons() {
 							<p>Are you sure you want to delete this pet?</p>
 						</Modal.Content>
 						<Modal.Actions>
-							<Button onClick={() => setDeleteModal(false)} content="Cancel" />
+							<Button  onClick={() => setDeleteModal(false)} content="Cancel" />
 							<Button
 								negative
 								icon="trash"
@@ -126,11 +118,9 @@ function PetButtons() {
 							/>
 						</Modal.Actions>
 					</Modal>
-				</div>
+		
 			</div>
-			<div>
-				<Button color="grey">Return</Button>
-			</div>
+		
 		</>
 	);
 }

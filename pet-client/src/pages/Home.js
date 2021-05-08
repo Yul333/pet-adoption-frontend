@@ -8,9 +8,9 @@ function Home() {
 	if (!user) {
 		return (
 			<>
-				<Segment style={{ padding: "3em 0em" }} vertical>
+				<Segment style={{ padding: "2em 0em" }} vertical>
 					<Grid centered stackable>
-						<Grid.Column width={13}>
+						<Grid.Column width={14}>
 							<h1> {`Welcome, Friend!`}</h1>
 							<br />
 
@@ -19,7 +19,7 @@ function Home() {
 								src={
 									"https://image.freepik.com/free-photo/group-pet_87557-4334.jpg"
 								}
-								size="huge"
+								size="large"
 							/>
 
 							<Header as="h3" style={{ fontSize: "2em" }}>
@@ -50,9 +50,9 @@ function Home() {
 	}
 	return (
 		<>
-			<Segment style={{ padding: "3em 0em" }} vertical>
+			<Segment style={{ padding: "2em 0em" }} vertical>
 				<Grid centered stackable>
-					<Grid.Column width={13}>
+					<Grid.Column width={14}>
 						<h1> {`Welcome, ${user.firstName}!`}</h1>
 						<br />
 
@@ -61,7 +61,7 @@ function Home() {
 							src={
 								"https://image.freepik.com/free-photo/group-pet_87557-4334.jpg"
 							}
-							size="huge"
+							size="large"
 						/>
 
 						<Header as="h3" style={{ fontSize: "2em" }}>

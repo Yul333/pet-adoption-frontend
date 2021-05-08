@@ -1,4 +1,3 @@
-import NProgress from "nprogress";
 import {
 	BrowserRouter as Router,
 	Redirect,
@@ -15,10 +14,6 @@ import Home from "../pages/Home";
 import MyPets from "../pages/MyPets";
 import Pet from "../pages/Pet";
 import MainNavigation from "./MainNavigation";
-
-Router.onRouteChangeStart = () => NProgress.start();
-Router.onRouteChangeComplete = () => NProgress.done();
-Router.onRouteChangeError = () => NProgress.done();
 
 function Header() {
 	return (

@@ -9,10 +9,10 @@ import {
 	Menu,
 } from "semantic-ui-react";
 import { signUp } from "../lib/api";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function SignUp() {
-	// const [disabled, setDisabled] = useState(true);
+
 	const [open, setOpen] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState("");
@@ -26,11 +26,13 @@ function SignUp() {
 
 	async function handleSubmit(event) {
 		event.preventDefault();
+		
 		if (password !== repeatPass) {
 			setError(
-				<Message negative>
-					<Message.Header>Password Doesn't Much! </Message.Header>
-				</Message>
+				"Password Doesn't Match!"
+				// <Message negative>
+				// 	<Message.Header>Password Doesn't Much! </Message.Header>
+				// </Message>
 			);
 			return;
 		}
@@ -39,7 +41,7 @@ function SignUp() {
 			lastName,
 			email,
 			password,
-			// repeatPass,
+			repeatPass,
 			phoneNumber,
 		};
 
@@ -106,7 +108,7 @@ function SignUp() {
 							placeholder="Last Name"
 							name="name"
 							onChange={(event) => setLastName(event.target.value)}
-						/>
+						/>	<Message error header="Oops!" content={"ppp"} />
 						<Form.Input
 							fluid
 							icon="envelope"
@@ -134,7 +136,7 @@ function SignUp() {
 							iconPosition="left"
 							label="Repeat Password"
 							placeholder="Repeat Password"
-							name="Repeat password"
+							name="repeatPass"
 							type="password"
 							onChange={(event) => setRepeatPass(event.target.value)}
 						/>
@@ -157,14 +159,15 @@ function SignUp() {
 								color="orange"
 								content="Signup"
 							/> */}
-					</Segment>
 					{/* </Form> */}
+					
+					</Segment>
 					<Message attached="bottom" warning>
 						<Icon name="help" />
 						Existing user?{" "}
-						<a href="/login">
-							<h2>Log in here</h2>
-						</a>{" "}
+						<Link href="/login">
+          <a>Log in here</a>
+        </Link>{" "}
 						instead.
 					</Message>
 				</Modal.Content>

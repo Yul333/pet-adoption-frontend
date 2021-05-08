@@ -7,103 +7,56 @@ import axios from "axios";
 const INITIAL_USER = {
 	firstName: "",
 	lastName: "",
-	// email: "",
 	password: "",
-
 	phoneNumber: "",
-	bio:"",
+	bio: "",
 };
 
-
-
 function Account() {
+	const { token, user: userFromCtx } = useContext(setUserTokenContext);
 
-	const {token, user: userFromCtx } = useContext(setUserTokenContext);
+	console.log(userFromCtx);
 
-	console.log(userFromCtx)
-
-	const [user, setUser] = React.useState({...INITIAL_USER, ...userFromCtx});
+	const [user, setUser] = React.useState({ ...INITIAL_USER, ...userFromCtx });
 
 	const [disabled, setDisabled] = React.useState(true);
 	const [loading, setLoading] = React.useState(false);
 	const [error, setError] = React.useState("");
 
-
-	// const [firstName, setFirstName] =  React.useState("");
-	// const [lastName, setLastName] =  React.useState("");
-	// const [email, setEmail] =  React.useState("");
-	// const [password, setPassword] =  React.useState("");
-	// const [bio, setBio] =  React.useState("");
-	// const [phoneNumber, setPhoneNumber] =  React.useState("");
-
 	async function handleSubmit(event) {
-				event.preventDefault();
-	// 			let urlParams = new URLSearchParams(window.location.search);
-	// const id = urlParams.get("_id");
-				 
-	// 				const url = `http://localhost:5050/api/users/${id}`;
-	// 				const response = await axios.put(url, id);
-	// 				console.log(response);
-			
-	// 				window.location.replace("http://localhost:3000/pets");
-				
-				const userInfo = {
-					firstName: user.firstName,
-					lastName: user.lastName,
-					// email:,
-					password: user.password,
-					phoneNumber:user.phoneNumber,
-					bio:user.bio,
-				};
-		console.log(user)
-		console.log(userFromCtx)
-				try {
-					console.log("start loading");
-					setLoading(true);
-					setError("");
-					console.log("start sending");
-					const user = await editAccount(userFromCtx._id, userInfo, token);
-					console.log("finish sending");
-					console.log(user);
-					setLoading(false);
-				
-				} catch (error) {
-					setError("Something wrong...");
-				} finally {
-					setLoading(false);
-				}
-			}
-		
+		event.preventDefault();
 
-	// React.useEffect(() => {
-	// 	if (user) {
-	// 		let isUser = Object.values(user).every((el) => Boolean(el));
-	// 		isUser ? setDisabled(false) : setDisabled(true);
-	// 	}
-	// }, [user]);
+		const userInfo = {
+			firstName: user.firstName,
+			lastName: user.lastName,
+			password: user.password,
+			phoneNumber: user.phoneNumber,
+			bio: user.bio,
+		};
+		console.log(user);
+		console.log(userFromCtx);
+		try {
+			console.log("start loading");
+			setLoading(true);
+			setError("");
+			console.log("start sending");
+			const user = await editAccount(userFromCtx._id, userInfo, token);
+			console.log("finish sending");
+			console.log(user);
+			setLoading(false);
+		} catch (error) {
+			setError("Something wrong...");
+		} finally {
+			setLoading(false);
+		}
+	}
 
 	function handleChange(event) {
 		const { name, value } = event.target;
-		console.log(name, value)
+		console.log(name, value);
 		setUser({ ...user, [name]: value });
 	}
 
-	// async function handleSubmit(event) {
-	// 	event.preventDefault();
-
-	// 	try {
-	// 		setLoading(true);
-	// 		setError("");
-	// 		console.log(user);
-	// 	} catch (error) {
-	// 		setError("OOOOPs");
-	// 	} finally {
-	// 		setLoading(false);
-	// 	}
-	// }
-	// if (!user || !user.firstName) {
-	// 	return <>Loading...</>;
-	// }
 	return (
 		<>
 			<Message
@@ -116,83 +69,72 @@ function Account() {
 			<Form error={Boolean(error)} loading={loading} onSubmit={handleSubmit}>
 				<Message error header="Oops!" content={error} />
 				<Segment style={{ padding: "3em 0em" }} vertical>
-					<Grid  stackable>
+					<Grid stackable>
 						<Grid.Column width={13}>
-					<Form.Input
-						fluid
-						icon="user"
-						iconPosition="left"
-						label="First Name"
-						placeholder="First Name"
-						name="firstName"
-						defaultValue={user.firstName}
-						onChange={handleChange}
-					/>
-					<Form.Input
-						fluid
-						icon="user"
-						iconPosition="left"
-						label="Last Name"
-						placeholder="Last Name"
-						name="lastName"
-						defaultValue={user.lastName}
-						onChange={handleChange}
-					/>
-					{/* <Form.Input
-						fluid
-						icon="envelope"
-						iconPosition="left"
-						label="Email"
-						placeholder="Email"
-						name="email"
-						type="email"
-						value={user.email}
-						onChange={handleChange}
-					/> */}
-					<Form.Input
-						fluid
-						icon="lock"
-						iconPosition="left"
-						label="Password"
-						placeholder="Password"
-						name="password"
-						type="password"
-						defaultValue={user.password}
-						onChange={handleChange}
-					/>
+							<Form.Input
+								fluid
+								icon="user"
+								iconPosition="left"
+								label="First Name"
+								placeholder="First Name"
+								name="firstName"
+								defaultValue={user.firstName}
+								onChange={handleChange}
+							/>
+							<Form.Input
+								fluid
+								icon="user"
+								iconPosition="left"
+								label="Last Name"
+								placeholder="Last Name"
+								name="lastName"
+								defaultValue={user.lastName}
+								onChange={handleChange}
+							/>
+					
+							<Form.Input
+								fluid
+								icon="lock"
+								iconPosition="left"
+								label="Password"
+								placeholder="Password"
+								name="password"
+								type="password"
+								defaultValue={user.password}
+								onChange={handleChange}
+							/>
 
-					<Form.Input
-						fluid
-						control="input"
-						// max={12}
-						icon="phone square"
-						iconPosition="left"
-						label="Phone Number"
-						placeholder="Phone Number"
-						name="phoneNumber"
-						type="number"
-						defaultValue={user.phoneNumber}
-						onChange={handleChange}
-					/>
-					<Form.Input
-						fluid
-						icon="address card"
-						iconPosition="left"
-						label="Short Bio"
-						placeholder="Short Bio"
-						name="bio"
-						type="Short Bio"
-						defaultValue={user.bio}
-						onChange={handleChange}
-					/>
-					<Button
-						// disabled={disabled || loading}
-						icon="signup"
-						type="submit"
-						color="orange"
-						content="Save Changes"
-					/>
-					</Grid.Column>
+							<Form.Input
+								fluid
+								control="input"				
+								icon="phone square"
+								iconPosition="left"
+								label="Phone Number"
+								placeholder="Phone Number"
+								name="phoneNumber"
+								type="number"
+								defaultValue={user.phoneNumber}
+								onChange={handleChange}
+							/>
+							<Form.Input
+								fluid
+								icon="address card"
+								iconPosition="left"
+								label="Short Bio"
+								placeholder="Short Bio"
+								name="bio"
+								type="Short Bio"
+								defaultValue={user.bio}
+								onChange={handleChange}
+							/>
+							<Button
+					
+								icon="signup"
+								type="submit"
+								color="orange"
+								content="Save Changes"
+							/>
+						</Grid.Column>
 					</Grid>
 				</Segment>
 			</Form>

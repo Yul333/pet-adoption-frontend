@@ -29,13 +29,6 @@ export const login = async (user) => {
 	);
 	return response.data;
 };
-// export async function getPetById(id, token) {
-// 	const response = await axios.get(
-// 	  baseUrl + '/products/' + id,
-// 	  getAuthConfig(token)
-// 	);
-// 	return response.data;
-//   }
 
 export async function getMyPets(token) {
 	const response = await axios.get(

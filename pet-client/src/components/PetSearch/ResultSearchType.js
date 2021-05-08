@@ -1,23 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { Container, Message } from "semantic-ui-react";
 
-const ResultSearch = ({ nameList = [] }) => {
+const ResultSearchType = ({ typeList = [] }) => {
 	return (
 		<>
 			<Container>
-				{nameList.map((data, index) => {
+				{typeList.map((data, index) => {
 					if (data) {
 						return (
-							<div key={data.Name}>
-								<Message 
+							<div key={data.Type}>
+								<Message list
 								style={{
 									margin: "2px",
-								}}
-								list>
+								}}>
 									{" "}
 									<Link to={`/Pet?_id=${data._id}`}>
-										<span>{data.Name}</span>
+										<span>{data.Type}</span>
 									</Link>{" "}
 								</Message>
 							</div>
@@ -30,4 +29,4 @@ const ResultSearch = ({ nameList = [] }) => {
 	);
 };
 
-export default ResultSearch;
+export default ResultSearchType;

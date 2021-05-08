@@ -1,4 +1,5 @@
-import { Card, Grid, Image,  Segment } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import { Button, Card, Grid, Image,  Segment } from "semantic-ui-react";
 
 function PetList({ pets }) {
 	// const { Type, Name, AdoptionStatus, Picture, Height, Weight, Color, Bio, Hypoallergenic, DietaryRestrictions, Breed } = pet
@@ -9,7 +10,6 @@ function PetList({ pets }) {
 		  header: pet.Name,
 		  image: pet.Picture,
 		  meta: pet.AdoptionStatus,
-		  // meta: pet.Type,
 		  color: 'teal',
 		  fluid: true,
 		  key: pet._id,
@@ -17,6 +17,7 @@ function PetList({ pets }) {
 		}))
 	}
 	if (!pets || pets.length === 0) {
+		
 		return "loading...";
 	}
 	return (
