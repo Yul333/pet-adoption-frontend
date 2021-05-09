@@ -16,8 +16,8 @@ function MainNavigation(props) {
 	const { user } = useContext(setUserTokenContext);
 
 	return (
-		<Menu stackable fluid id="menu">
-			<Container text>
+		<Menu stackable  id="menu">
+			<Container text >
 				<Image
 					avatar
 					src={petcute3}

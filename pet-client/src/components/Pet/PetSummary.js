@@ -49,7 +49,7 @@ size='tiny'
 						<Label size="large" color='green'>Height: </Label>  {Height}
 					</Item.Description>
 					<Item.Description>
-						<Label size="large" color='green'>Weight: {Weight}</Label>  {Weight}
+						<Label size="large" color='green'>Weight: </Label>  {Weight}
 					</Item.Description>
 					<Item.Description>
 						<Label size="large" color='green'>Hypoallergenic: </Label>  {Hypoallergenic}
@@ -79,61 +79,3 @@ size='tiny'
 export default PetSummary;
 
 
-// 	{/* <Card centered
-// 	size = "large"
-// 	style={{
-// 		height: "200px",
-// 		width:"600px",
-// 		fontsize:"200px"
-		
-// 	  }}
-// 	>
-//     <Image src={Picture} wrapped ui={false} />
-//     <Card.Content
-// 	 style={{
-// 		height: "200px",
-// 		width:"600px"
-		
-// 	  }}>
-//       <Card.Header >  {Name}</Card.Header>
-//       <Card.Meta>
-//         <span className='date'>{AdoptionStatus}</span>
-//       </Card.Meta>
-//       <Card.Description fluid>
-// 	  Type: {Type}
-// 	  {/* Color: {Color}
-// 	  Height: {Height}
-// 	  Weight: {Weight}
-// 	  Hypoallergenic: {Hypoallergenic}
-// 	  DietaryRestrictions: {DietaryRestrictions}
-// 	  Breed: {Breed} */}
-
-//       </Card.Description>
-// 	  <Card.Description fluid>
-// 	  {/* Type: {Type} */}
-// 	  Color: {Color}
-// 	  {/* Height: {Height}
-// 	  Weight: {Weight}
-// 	  Hypoallergenic: {Hypoallergenic}
-// 	  DietaryRestrictions: {DietaryRestrictions}
-// 	  Breed: {Breed} */}
-
-//       </Card.Description>
-// 	  <Card.Description fluid>
-// 	  {/* Type: {Type}
-// 	  Color: {Color} */}
-// 	  Height: {Height}
-// 	  {/* Weight: {Weight}
-// 	  Hypoallergenic: {Hypoallergenic}
-// 	  DietaryRestrictions: {DietaryRestrictions}
-// 	  Breed: {Breed} */}
-
-//       </Card.Description>
-//     </Card.Content>
-//     <Card.Content extra>
-//       <a>
-//         <Icon name='user' />
-//         22 Friends
-//       </a>
-//     </Card.Content>
-//   </Card> */}

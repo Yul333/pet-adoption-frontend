@@ -50,14 +50,17 @@ const SearchAFriend = (props) => {
 				<span style={{ marginLeft: "100px" }}>
 					<Button
 						onClick={handleChange}
-						content={changeType ? "Search by Type" : "Search by Name"}
+						content={changeType ? "Click here to Search by Type" : "Click here to Search by Name"}
 						primary
 					/>
 				</span>
 				{changeType ? (
-					<SearchBar input={input} onChange={foundName} />
+					
+										
+					<SearchBar input={input} onChange={foundName}  changeType={changeType}/>
+				
 				) : (
-					<SearchBar input={input} onChange={foundType} />
+					<SearchBar input={input} onChange={foundType} changeType={changeType}/>
 				)}
 				{changeType ?  (
 					<ResultSearch nameList={nameList} />
@@ -65,6 +68,7 @@ const SearchAFriend = (props) => {
 					<ResultSearchType typeList={typeList} />
 				)}
 			</>
+			
 		);
 	};
 

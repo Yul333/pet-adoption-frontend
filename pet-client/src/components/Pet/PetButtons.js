@@ -45,7 +45,7 @@ function PetButtons() {
 	}
 
 	return (
-		<>
+		<>{ userFromCtx &&
 			<div>
 			
 					<Button
@@ -119,9 +119,19 @@ function PetButtons() {
 						</Modal.Actions>
 					</Modal>
 		
-			</div>
+		</div>
+		}
+		<div style={{
+fontSize: "25px",
+color: "red"
+		}}>
+		{!userFromCtx && 
+			 "Please signup/login in order to add pet to your pets page"
 		
+		}
+		</div>
 		</>
+		
 	);
 }
 

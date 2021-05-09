@@ -1,7 +1,7 @@
 import React from "react";
 import { Container } from "semantic-ui-react";
 
-const SearchBar = ({ input: keyword, onChange: setKeyword }) => {
+const SearchBar = ({ input: keyword, onChange: setKeyword, changeType: changeType}) => {
 	const BarStyling = {
 		width: "20rem",
 		background: "#F2F1F9",
@@ -15,7 +15,7 @@ const SearchBar = ({ input: keyword, onChange: setKeyword }) => {
 				style={BarStyling}
 				key="stam"
 				value={keyword}
-				placeholder={"search pet"}
+				placeholder={changeType ? "Search By Name": "Search By Type"}
 				onChange={(e) => setKeyword(e.target.value)}
 			/>
 		</Container>

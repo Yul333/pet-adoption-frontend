@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button, Card, Grid, Image,  Segment } from "semantic-ui-react";
 
 function PetList({ pets }) {
-	// const { Type, Name, AdoptionStatus, Picture, Height, Weight, Color, Bio, Hypoallergenic, DietaryRestrictions, Breed } = pet
+	
 	function mapPetsToItems(petsArr = []) {
 ;
 
