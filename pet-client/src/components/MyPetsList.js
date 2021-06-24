@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Button, Card, Grid, Image, Segment } from "semantic-ui-react";
+import { Button, Card, Grid, Segment } from "semantic-ui-react";
 
 function MyPetsList({ pets }) {
 	function mapPetsToItems(petsArr = []) {

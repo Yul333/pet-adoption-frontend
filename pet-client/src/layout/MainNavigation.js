@@ -12,12 +12,11 @@ function MainNavigation(props) {
 		window.location.replace("http://localhost:3000/");
 	}
 
-	const [open, setOpen] = React.useState(false);
-	const { user } = useContext(setUserTokenContext);
+		const { user } = useContext(setUserTokenContext);
 
 	return (
-		<Menu stackable  id="menu">
-			<Container text >
+		<Menu stackable id="menu">
+			<Container text>
 				<Image
 					avatar
 					src={petcute3}

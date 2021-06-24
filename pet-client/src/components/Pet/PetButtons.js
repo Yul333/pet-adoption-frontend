@@ -1,8 +1,6 @@
 import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Button, Modal } from "semantic-ui-react";
-import Pet from "../../pages/Pet";
-import SavePet from "../Pet/SavePet";
 import { setUserTokenContext } from "../../context/UserAuth";
 
 function PetButtons() {

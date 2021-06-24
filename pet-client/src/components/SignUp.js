@@ -10,6 +10,8 @@ import {
 } from "semantic-ui-react";
 import { signUp } from "../lib/api";
 import { Link, useHistory } from "react-router-dom";
+import { setUserTokenContext } from "../context/UserAuth";
+import { useContext } from "react";
 
 function SignUp() {
 
@@ -23,6 +25,7 @@ function SignUp() {
 	const [repeatPass, setRepeatPass] = useState("");
 	const [phoneNumber, setPhoneNumber] = useState("");
 	const history = useHistory();
+	const { setUserToken } = useContext(setUserTokenContext);
 
 	async function handleSubmit(event) {
 		event.preventDefault();
@@ -30,9 +33,7 @@ function SignUp() {
 		if (password !== repeatPass) {
 			setError(
 				"Password Doesn't Match!"
-				// <Message negative>
-				// 	<Message.Header>Password Doesn't Much! </Message.Header>
-				// </Message>
+				
 			);
 			return;
 		}
@@ -47,16 +48,18 @@ function SignUp() {
 
 		try {
 			console.log("start loading");
-			setLoading(true);
+		
 			setError("");
 			console.log("start sending");
-			const user = await signUp(userInfo);
+			const {token, user} = await signUp(userInfo);
+			setUserToken(token, user);
+			history.push("/");
+			setOpen(false);
+			
 			console.log("finish sending");
 			console.log(user);
-			setLoading(false);
-			setOpen(false);
-			localStorage.set("email", user.email);
-			history.push("/myPetsPage");
+			console.log(token);
+
 		} catch (error) {
 			setError("Something wrong...");
 		} finally {
@@ -162,14 +165,14 @@ function SignUp() {
 					{/* </Form> */}
 					
 					</Segment>
-					<Message attached="bottom" warning>
+					{/* <Message attached="bottom" warning>
 						<Icon name="help" />
 						Existing user?{" "}
 						<Link href="/login">
           <a>Log in here</a>
         </Link>{" "}
 						instead.
-					</Message>
+					</Message> */}
 				</Modal.Content>
 				<Modal.Actions>
 					{/* <Button color="black" onClick={() => setOpen(false)}>

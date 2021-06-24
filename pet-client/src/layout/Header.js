@@ -29,7 +29,6 @@ function Header() {
 					</Route>
 					<Route path="/SearchAFriend" exact>
 						<SearchAFriend />
-						{/* <searchAFriend /> */}
 					</Route>
 					<Route path="/AllPets" exact>
 						<AllPets />

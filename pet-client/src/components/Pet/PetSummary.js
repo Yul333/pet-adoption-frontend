@@ -1,7 +1,8 @@
-import { Item, Label, Button, Card, Image, Icon, Container, Message, } from "semantic-ui-react";
+import { Container, Item, Label, Message } from "semantic-ui-react";
 import AddPetToMyPets from "./PetButtons";
 
-function PetSummary({
+function PetSummary(
+	{
 	_id,
 	Type,
 	Name,
@@ -14,7 +15,8 @@ function PetSummary({
 	Hypoallergenic,
 	DietaryRestrictions,
 	Breed,
-}) {
+}
+) {
 	return (
     <div style={{
 		fontSize:"18px",

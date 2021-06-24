@@ -12,6 +12,7 @@ function getAuthConfig(token) {
 
 export const signUp = async (userInfo) => {
 	const response = await axios.post(`${baseUrl}/users/signup`, userInfo);
+	console.log("res", response.data)
 	return response.data;
 };
 export const editAccount = async (id, user, token) => {

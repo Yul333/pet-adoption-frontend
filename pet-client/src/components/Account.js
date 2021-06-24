@@ -15,7 +15,7 @@ const INITIAL_USER = {
 function Account() {
 	const { token, user: userFromCtx } = useContext(setUserTokenContext);
 
-	console.log(userFromCtx);
+	console.log();
 
 	const [user, setUser] = React.useState({ ...INITIAL_USER, ...userFromCtx });
 
@@ -91,7 +91,7 @@ function Account() {
 								defaultValue={user.lastName}
 								onChange={handleChange}
 							/>
-					
+
 							<Form.Input
 								fluid
 								icon="lock"
@@ -106,7 +106,7 @@ function Account() {
 
 							<Form.Input
 								fluid
-								control="input"				
+								control="input"
 								icon="phone square"
 								iconPosition="left"
 								label="Phone Number"
@@ -128,7 +128,6 @@ function Account() {
 								onChange={handleChange}
 							/>
 							<Button
-					
 								icon="signup"
 								type="submit"
 								color="orange"
