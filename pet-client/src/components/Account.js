@@ -14,12 +14,7 @@ const INITIAL_USER = {
 
 function Account() {
 	const { token, user: userFromCtx } = useContext(setUserTokenContext);
-
-	console.log();
-
 	const [user, setUser] = React.useState({ ...INITIAL_USER, ...userFromCtx });
-
-	const [disabled, setDisabled] = React.useState(true);
 	const [loading, setLoading] = React.useState(false);
 	const [error, setError] = React.useState("");
 
