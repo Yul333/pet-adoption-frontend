@@ -1,22 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { useHistory } from "react-router-dom";
 import {
 	Button,
 	Form,
 	Icon,
-	Message,
-	Segment,
-	Modal,
 	Menu,
+	Message,
+	Modal,
+	Segment,
 } from "semantic-ui-react";
-import { signUp } from "../lib/api";
-import { Link, useHistory } from "react-router-dom";
 import { setUserTokenContext } from "../context/UserAuth";
-import { useContext } from "react";
+import { signUp } from "../lib/api";
 
 function SignUp() {
-
-	const [open, setOpen] = useState(false);
-	const [loading, setLoading] = useState(false);
+	const [open, setOpen] = useState(false);//opens modal
 	const [error, setError] = useState("");
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
@@ -27,14 +24,14 @@ function SignUp() {
 	const history = useHistory();
 	const { setUserToken } = useContext(setUserTokenContext);
 
+console.log(history)
+
+
 	async function handleSubmit(event) {
 		event.preventDefault();
-		
+
 		if (password !== repeatPass) {
-			setError(
-				"Password Doesn't Match!"
-				
-			);
+			setError("Password Doesn't Match!");
 			return;
 		}
 		const userInfo = {
@@ -48,22 +45,19 @@ function SignUp() {
 
 		try {
 			console.log("start loading");
-		
+
 			setError("");
 			console.log("start sending");
-			const {token, user} = await signUp(userInfo);
+			const { token, user } = await signUp(userInfo);
 			setUserToken(token, user);
 			history.push("/");
 			setOpen(false);
-			
+
 			console.log("finish sending");
 			console.log(user);
 			console.log(token);
-
 		} catch (error) {
 			setError("Something wrong...");
-		} finally {
-			setLoading(false);
 		}
 	}
 
@@ -91,7 +85,6 @@ function SignUp() {
 						content="Create a new account"
 						color="teal"
 					/>
-					{/* <Form error={Boolean(error)} loading={loading}> */}
 					<Message error header="Oops!" content={error} />
 					<Segment>
 						<Form.Input
@@ -111,7 +104,8 @@ function SignUp() {
 							placeholder="Last Name"
 							name="name"
 							onChange={(event) => setLastName(event.target.value)}
-						/>	<Message error header="Oops!" content={"ppp"} />
+						/>{" "}
+						<Message error header="Oops!" content={"ppp"} />
 						<Form.Input
 							fluid
 							icon="envelope"
@@ -132,7 +126,6 @@ function SignUp() {
 							type="password"
 							onChange={(event) => setPassword(event.target.value)}
 						/>
-
 						<Form.Input
 							fluid
 							icon="lock"
@@ -143,7 +136,6 @@ function SignUp() {
 							type="password"
 							onChange={(event) => setRepeatPass(event.target.value)}
 						/>
-
 						<Form.Input
 							fluid
 							control="input"
@@ -155,35 +147,14 @@ function SignUp() {
 							type="number"
 							onChange={(event) => setPhoneNumber(event.target.value)}
 						/>
-						{/* <Button
-								icon="signup"
-								type="submit"
-								onClick={handleSubmit}
-								color="orange"
-								content="Signup"
-							/> */}
-					{/* </Form> */}
-					
 					</Segment>
-					{/* <Message attached="bottom" warning>
-						<Icon name="help" />
-						Existing user?{" "}
-						<Link href="/login">
-          <a>Log in here</a>
-        </Link>{" "}
-						instead.
-					</Message> */}
 				</Modal.Content>
 				<Modal.Actions>
-					{/* <Button color="black" onClick={() => setOpen(false)}>
-						Nope
-					</Button> */}
 					<Button
 						content="Sign me up!"
 						type="submit"
 						labelPosition="center"
 						icon="signup"
-						// onClick={() => setOpen(false)}
 						positive
 					/>
 				</Modal.Actions>

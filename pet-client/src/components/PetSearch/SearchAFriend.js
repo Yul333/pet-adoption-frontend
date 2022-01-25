@@ -6,70 +6,70 @@ import { Button } from "semantic-ui-react";
 
 const SearchAFriend = (props) => {
 	const [input, setInput] = useState("");
-	const [petsDefault, setPetsDefault] = useState();
+	const [petsDefault, setPetsDefault] = useState([]);
 	const [nameList, setNameList] = useState();
 	const [typeList, setTypeList] = useState();
 	const [changeType, setChangeType] = useState(true);
 
 	function handleChange() {
-		setChangeType(!changeType);
+		setChangeType(!changeType); //originally true. '!'-toggles by clicking between name/type   
 	}
 
-		const fetchData = async () => {
-			return await fetch("http://localhost:5050/api/pets")
-				.then((response) => response.json())
-				.then((data) => {
-					setNameList(data);
-					setPetsDefault(data);
-					console.log(data);
-				});
-		};
-
-		const foundName = async (input) => {
-			const filtered = petsDefault.filter((pet) => {
-				return pet.Name.toLowerCase().includes(input.toLowerCase());
+	const fetchData = async () => {
+		return await fetch("http://localhost:5050/api/pets")
+			.then((response) => response.json())
+			.then((data) => {
+				// setNameList(data);
+				setPetsDefault(data);
+				console.log(data);
 			});
-			setInput(input);
-			setNameList(filtered);
-		};
-
-		const foundType = async (input) => {
-			const filtered = petsDefault.filter((pet) => {
-				return pet.Type.toLowerCase().includes(input.toLowerCase());
-			});
-			setInput(input);
-			setTypeList(filtered);
-		};
-
-		useEffect(() => {
-			fetchData();
-		}, []);
-
-		return (
-			<>
-				<span style={{ marginLeft: "100px" }}>
-					<Button
-						onClick={handleChange}
-						content={changeType ? "Click here to Search by Type" : "Click here to Search by Name"}
-						primary
-					/>
-				</span>
-				{changeType ? (
-					
-										
-					<SearchBar input={input} onChange={foundName}  changeType={changeType}/>
-				
-				) : (
-					<SearchBar input={input} onChange={foundType} changeType={changeType}/>
-				)}
-				{changeType ?  (
-					<ResultSearch nameList={nameList} />
-				) : (
-					<ResultSearchType typeList={typeList} />
-				)}
-			</>
-			
-		);
 	};
+
+	const foundName = async (input) => {
+		const filtered = petsDefault.filter((pet) => {
+			return pet.Name.toLowerCase().includes(input.toLowerCase());
+		});
+		setInput(input);
+		setNameList(filtered);
+	};
+
+	const foundType = async (input) => {
+		const filtered = petsDefault.filter((pet) => {
+			return pet.Type.toLowerCase().includes(input.toLowerCase());
+		});
+		setInput(input);
+		setTypeList(filtered);
+	};
+
+	useEffect(() => {
+		fetchData();
+	}, []);
+
+	return (
+		<>
+			<span style={{ marginLeft: "100px" }}>
+				<Button
+					onClick={handleChange}
+					content={
+						changeType
+							? "Click here to Search by Type"
+							: "Click here to Search by Name"
+					}//if the changeType btn is on, then the search is by name and vice versa 
+					primary
+				/>
+			</span>
+			{changeType ? (                                 //for the placeholder in SearchBar
+				<SearchBar input={input} onChange={foundName} changeType={changeType} /> 
+			) : ( //receives input from the SearchBar as found in its value(line 17) 
+				<SearchBar input={input} onChange={foundType} changeType={changeType} />
+			)}
+			{changeType ? (
+				<ResultSearch nameList={nameList} />
+			) : (
+				<ResultSearchType typeList={typeList} />
+			)}
+		</>
+	);
+};
 
 export default SearchAFriend;

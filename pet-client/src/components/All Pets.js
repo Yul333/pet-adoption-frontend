@@ -17,13 +17,12 @@ function AllPets() {
 	}
 
 	return (
-    <>
-		<div>
-			<PetList pets={pets} />
-		</div>
-  
-   </>
+		<>
+			<div>
+				<PetList pets={pets} />
+			</div>
+		</>
 	);
-  }
+}
 
 export default AllPets;

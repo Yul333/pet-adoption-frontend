@@ -7,12 +7,12 @@ import { setUserTokenContext } from "../context/UserAuth";
 import petcute3 from "../static/petcute.png";
 
 function MainNavigation(props) {
-	function dropLocalForageCache() {
+	function dropLocalForageCache() { //used in sign out
 		localforage.clear();
 		window.location.replace("http://localhost:3000/");
 	}
 
-		const { user } = useContext(setUserTokenContext);
+		const { user } = useContext(setUserTokenContext);// accepts the returned value and returns the current context value as it given by the provider
 
 	return (
 		<Menu stackable id="menu">
@@ -51,7 +51,7 @@ function MainNavigation(props) {
 					Search A Friend
 				</Menu.Item>
 
-				{user && (
+				{user && ( // logical and conditional operator. if user is true, then everything after it will appear 
 					<>
 						<Menu.Item
 							header
@@ -86,7 +86,7 @@ function MainNavigation(props) {
 						</Menu.Item>
 					</>
 				)}
-				{!user && (
+				{!user && ( // if there's no user, then this will appear
 					<>
 						<LoginForm />
 

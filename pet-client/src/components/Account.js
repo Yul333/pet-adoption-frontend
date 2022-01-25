@@ -2,19 +2,20 @@ import React, { useContext } from "react";
 import { Button, Form, Grid, Message, Segment } from "semantic-ui-react";
 import { editAccount } from "../lib/api";
 import { setUserTokenContext } from "../context/UserAuth";
-import axios from "axios";
+// import axios from "axios";
 
-const INITIAL_USER = {
+const INITIAL_USER = { //empty fields
 	firstName: "",
 	lastName: "",
 	password: "",
 	phoneNumber: "",
-	bio: "",
+	// bio: "",
 };
 
 function Account() {
-	const { token, user: userFromCtx } = useContext(setUserTokenContext);
-	const [user, setUser] = React.useState({ ...INITIAL_USER, ...userFromCtx });
+	const { token, user: userFromCtx } = useContext(setUserTokenContext);//getting context
+	const [user, setUser] = React.useState({ ...INITIAL_USER });// updating new user info by the empty INITIAL_USER fields(, ...userFromCtx-not sure what it was used for)
+	console.log(user);
 	const [loading, setLoading] = React.useState(false);
 	const [error, setError] = React.useState("");
 
@@ -26,16 +27,17 @@ function Account() {
 			lastName: user.lastName,
 			password: user.password,
 			phoneNumber: user.phoneNumber,
-			bio: user.bio,
+			// bio: user.bio,
 		};
 		console.log(user);
 		console.log(userFromCtx);
+		console.log(userInfo)
 		try {
 			console.log("start loading");
 			setLoading(true);
 			setError("");
 			console.log("start sending");
-			const user = await editAccount(userFromCtx._id, userInfo, token);
+			const user = await editAccount(userFromCtx._id, userInfo, token);//sends new userInfo with editAccount from api.js
 			console.log("finish sending");
 			console.log(user);
 			setLoading(false);
@@ -111,7 +113,7 @@ function Account() {
 								defaultValue={user.phoneNumber}
 								onChange={handleChange}
 							/>
-							<Form.Input
+							{/* <Form.Input
 								fluid
 								icon="address card"
 								iconPosition="left"
@@ -121,7 +123,7 @@ function Account() {
 								type="Short Bio"
 								defaultValue={user.bio}
 								onChange={handleChange}
-							/>
+							/> */}
 							<Button
 								icon="signup"
 								type="submit"

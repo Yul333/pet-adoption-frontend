@@ -6,7 +6,7 @@ const ResultSearch = ({ nameList = [] }) => {
 	return (
 		<>
 			<Container>
-				{nameList.map((data, index) => {
+				{nameList.map((data) => {
 					if (data) {
 						return (
 							<div key={data.Name}>

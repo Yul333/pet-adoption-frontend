@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {
 	Button,
 	Form,
@@ -7,7 +7,7 @@ import {
 	Menu,
 	Message,
 	Modal,
-	Segment
+	Segment,
 } from "semantic-ui-react";
 import { setUserTokenContext } from "../context/UserAuth";
 import { login } from "../lib/api";
@@ -21,46 +21,38 @@ function LoginForm() {
 	const { setUserToken } = useContext(setUserTokenContext);
 
 	const [userInfo, setUserInfo] = React.useState(INITIAL_USER);
-	// const [disabled, setDisabled] = React.useState(true);
-	// const [loading, setLoading] = React.useState(false);
+
 	const [error, setError] = React.useState("");
 	const [open, setOpen] = React.useState(false);
 	const history = useHistory();
-
-	// React.useEffect(() => {
-	// 	const isUser = Object.values(userInfo).every((el) => Boolean(el));
-	// 	isUser ? setDisabled(false) : setDisabled(true);
-	// }, [userInfo]);
 
 	function handleChange(event) {
 		const { name, value } = event.target;
 		setUserInfo((prevState) => ({ ...prevState, [name]: value }));
 	}
+	console.log(userInfo);//what ever the user inserts
 
 	async function handleSubmit(event) {
 		event.preventDefault();
 		setError("");
-		// setLoading(true);
 
-		if (!userInfo.email || !userInfo.password) {
+		if (!userInfo.email || !userInfo.password) {//if no email or password, the message below appears
 			setError("No email and/or password");
 
 			return;
 		}
 
 		try {
-			const { token, user } = await login(userInfo);
+			const { token, user } = await login(userInfo);//waits for servers' response
 			setUserToken(token, user);
 			history.push("/");
 			setOpen(false);
 
 			console.log(user);
 			console.log(token);
-
 		} catch (error) {
 			setError("Email and password do not match!");
-		}
-		
+		}//works only if email is wrong
 	}
 
 	return (
@@ -71,7 +63,7 @@ function LoginForm() {
 				style={{ position: "relative" }}
 				as={Form}
 				onSubmit={(e) => handleSubmit(e)}
-				onClose={() => setOpen(false)}
+				onClose={() => setOpen(false)}//opens the popping window
 				onOpen={() => setOpen(true)}
 				open={open}
 				trigger={

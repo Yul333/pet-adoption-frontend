@@ -14,9 +14,9 @@ const SearchBar = ({ input: keyword, onChange: setKeyword, changeType: changeTyp
 			<input
 				style={BarStyling}
 				key="stam"
-				value={keyword}
+				value={keyword} //goes to 'SearchAFriend's input
 				placeholder={changeType ? "Search By Name": "Search By Type"}
-				onChange={(e) => setKeyword(e.target.value)}
+				onChange={(e) => setKeyword(e.target.value)}//changes value
 			/>
 		</Container>
 	);

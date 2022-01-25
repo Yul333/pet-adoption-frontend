@@ -14,28 +14,28 @@ function MyPetsList({ pets }) {
 		}));
 	}
 	if (!pets || pets.length === 0) {
-		
-	
-		return <div style={{
-			fontSize: "20px",
-			marginBottom: "0.8em",
-		}}>
-			No pets found on your list... 
-
-			<br/>
-			<br/>
-			
-			<Link to="/AllPets">
-		<Button
-		 primary
-			style={{
-				marginBottom: "0.8em",
-			}}
-		>
-			<p>Look for a new friend</p>
-		</Button>
-	</Link>
-	</div>
+		return (
+			<div
+				style={{
+					fontSize: "20px",
+					marginBottom: "0.8em",
+				}}
+			>
+				No pets found on your list...
+				<br />
+				<br />
+				<Link to="/AllPets">
+					<Button
+						primary
+						style={{
+							marginBottom: "0.8em",
+						}}
+					>
+						<p>Look for a new friend</p>
+					</Button>
+				</Link>
+			</div>
+		);
 	}
 	return (
 		<>

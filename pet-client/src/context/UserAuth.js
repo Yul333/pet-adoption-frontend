@@ -1,13 +1,13 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import localforage from "localforage";
 
-export const setUserTokenContext = createContext(null);
+export const setUserTokenContext = createContext(null); //creates and resets context
 
-export const useAuth = () => {
-	return useContext(setUserTokenContext);
-};
+export const useAuth = () => {  //allows every comp to approach auth and to rerender if changed
+	return useContext(setUserTokenContext); //Hook that uses the created context 
+}; //created context and called it using the useAuth
 function UserAuth(props) {
-	const [token, setToken] = useState(null);
+	const [token, setToken] = useState(null); //Hooks for changing the inner state of comp
 	const [user, setUser] = useState(null);
 	useEffect(() => {
 		localforage.getItem("token", (error, value) => {
@@ -26,17 +26,17 @@ function UserAuth(props) {
 			}
 		});
 	}, []);
-	const context = { user, token, setUserToken };
+	const context = { user, token, setUserToken }; //contains context parameters
 
-	function setUserToken(token, user) {
-		localforage.setItem("token", token);
-		
-		localforage.setItem("user", user);
+	function setUserToken(token, user) { //func that is only declared and not used
+		localforage.setItem("token", token); //sets token in forage
+		                   //key   , value : defined here and goes into forage
+		localforage.setItem("user", user); //sets user in forage
 		setToken(token);
 		setUser(user);
 	}
-	return (
-		<setUserTokenContext.Provider value={context}>
+	return ( //here setUserTokenContext receives context and provides it down to the children
+		<setUserTokenContext.Provider value={context}> 
 			{props.children}
 		</setUserTokenContext.Provider>
 	);

@@ -6,7 +6,7 @@ import Header from "./Header";
 function Layout({ children }) {
 	return (
 		<>
-			<HeadContent />
+			{/* <HeadContent /> */}
 			<link rel="stylesheet" href="../App.css" />
 			<link
 				rel="stylesheet"

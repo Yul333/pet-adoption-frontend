@@ -4,9 +4,9 @@ import { Button, Modal } from "semantic-ui-react";
 import { setUserTokenContext } from "../../context/UserAuth";
 
 function PetButtons() {
-	const { token, user: userFromCtx } = useContext(setUserTokenContext);
-	let urlParams = new URLSearchParams(window.location.search);
-	const id = urlParams.get("_id");
+	const { user: userFromCtx } = useContext(setUserTokenContext);//chanig a name. insert different obj in user
+	let urlParams = new URLSearchParams(window.location.search);//searching url
+	const id = urlParams.get("_id");//extracts id
 	const [saveModal, setSaveModal] = React.useState(false);
 	const [deleteModal, setDeleteModal] = React.useState(false);
 	const [unSaveModal, setUnSaveModal] = React.useState(false)
@@ -27,7 +27,7 @@ function PetButtons() {
 		const response = await axios.put(url, {
 			data: { userId: userFromCtx._id },
 		});
-		console.log(response);
+		console.log(response);//appears in server terminal
 
 		window.location.replace("http://localhost:3000/myPetsPage");
 	}
@@ -43,7 +43,7 @@ function PetButtons() {
 	}
 
 	return (
-		<>{ userFromCtx &&
+		<>{ userFromCtx && //returns all
 			<div>
 			
 					<Button

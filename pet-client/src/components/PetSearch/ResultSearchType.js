@@ -1,12 +1,12 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Container, Message } from "semantic-ui-react";
 
 const ResultSearchType = ({ typeList = [] }) => {
 	return (
 		<>
 			<Container>
-				{typeList.map((data, index) => {
+				{typeList.map((data) => {
 					if (data) {
 						return (
 							<div key={data.Type}>
