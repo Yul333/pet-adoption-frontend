@@ -14,7 +14,7 @@ const INITIAL_USER = { //empty fields
 
 function Account() {
 	const { token, user: userFromCtx } = useContext(setUserTokenContext);//getting context
-	const [user, setUser] = React.useState({ ...INITIAL_USER });// updating new user info by the empty INITIAL_USER fields(, ...userFromCtx-not sure what it was used for)
+	const [user, setUser] = React.useState({ ...INITIAL_USER });// updating new user info by the empty INITIAL_USER fields//(, ...userFromCtx-not sure what it was used for)
 	console.log(user);
 	const [loading, setLoading] = React.useState(false);
 	const [error, setError] = React.useState("");
@@ -22,7 +22,7 @@ function Account() {
 	async function handleSubmit(event) {
 		event.preventDefault();
 
-		const userInfo = {
+		const userInfo = {//updated info
 			firstName: user.firstName,
 			lastName: user.lastName,
 			password: user.password,
@@ -37,7 +37,7 @@ function Account() {
 			setLoading(true);
 			setError("");
 			console.log("start sending");
-			const user = await editAccount(userFromCtx._id, userInfo, token);//sends new userInfo with editAccount from api.js
+			const user = await editAccount(userFromCtx._id, userInfo, token);//sends new userInfo with func editAccount from api.js
 			console.log("finish sending");
 			console.log(user);
 			setLoading(false);
@@ -48,8 +48,8 @@ function Account() {
 		}
 	}
 
-	function handleChange(event) {
-		const { name, value } = event.target;
+	function handleChange(event) {//knows how to address all changes
+		const { name, value } = event.target;//inputs' name and value
 		console.log(name, value);
 		setUser({ ...user, [name]: value });
 	}

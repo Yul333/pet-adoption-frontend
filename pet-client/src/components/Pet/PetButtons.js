@@ -4,7 +4,7 @@ import { Button, Modal } from "semantic-ui-react";
 import { setUserTokenContext } from "../../context/UserAuth";
 
 function PetButtons() {
-	const { user: userFromCtx } = useContext(setUserTokenContext);//chanig a name. insert different obj in user
+	const { user: userFromCtx } = useContext(setUserTokenContext);//Hook for user from ctx
 	let urlParams = new URLSearchParams(window.location.search);//searching url
 	const id = urlParams.get("_id");//extracts id
 	const [saveModal, setSaveModal] = React.useState(false);
@@ -15,7 +15,7 @@ function PetButtons() {
 		const url = `http://localhost:5050/api/pets/${id}`;
 
 		const response = await axios.delete(url);
-		console.log(response);
+		console.log(response);//appears in server terminal
 
 		window.location.replace("http://localhost:3000/pets");
 	}

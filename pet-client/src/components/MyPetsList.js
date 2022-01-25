@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button, Card, Grid, Segment } from "semantic-ui-react";
 
-function MyPetsList({ pets }) {
+function MyPetsList({ pets }) {//data from MyPets comp
 	function mapPetsToItems(petsArr = []) {
 		return petsArr.map((pet) => ({
 			header: pet.Name,

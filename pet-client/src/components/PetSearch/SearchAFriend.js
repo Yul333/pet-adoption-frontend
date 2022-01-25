@@ -54,7 +54,7 @@ const SearchAFriend = (props) => {
 						changeType
 							? "Click here to Search by Type"
 							: "Click here to Search by Name"
-					}//if the changeType btn is on, then the search is by name and vice versa 
+					}//if the changeType btn is appearing, then the search is by name and vice versa 
 					primary
 				/>
 			</span>
