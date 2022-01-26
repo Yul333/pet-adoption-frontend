@@ -14,7 +14,7 @@ const Pet = () => {
 
 	async function loadPets() {
 		const url = `http://localhost:5050/api/pets/${id}`; //puts id at the endpoint of the server
-		const response = await axios.get(url); // gets url
+		const response = await axios.get(url); // get pet
 		console.log(response);
 		setPetId(response.data.pet); //extracts the pet from obj that returned from server
 	}

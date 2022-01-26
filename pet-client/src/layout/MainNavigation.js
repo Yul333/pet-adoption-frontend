@@ -96,6 +96,6 @@ function MainNavigation(props) {
 			</Container>
 		</Menu>
 	);
-	//   ;
+	
 }
 export default MainNavigation;

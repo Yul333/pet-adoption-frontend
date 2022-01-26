@@ -11,10 +11,10 @@ const SearchAFriend = (props) => {
 	const [typeList, setTypeList] = useState();
 	const [changeType, setChangeType] = useState(true);
 
-	function handleChange() {
-		setChangeType(!changeType); //originally true. '!'-toggles by clicking between name/type   
-	}
-
+	// function handleChange() {
+	// 	setChangeType(!changeType); //originally true. '!'-toggles by clicking between name/type   
+	// }
+// const change = () => setChangeType(!changeType)
 	const fetchData = async () => {
 		return await fetch("http://localhost:5050/api/pets")
 			.then((response) => response.json())
@@ -22,10 +22,10 @@ const SearchAFriend = (props) => {
 				// setNameList(data);
 				setPetsDefault(data);
 				console.log(data);
-			});
+			}).catch();
 	};
 
-	const foundName = async (input) => {
+	const foundName =  (input) => {
 		const filtered = petsDefault.filter((pet) => {
 			return pet.Name.toLowerCase().includes(input.toLowerCase());
 		});
@@ -33,7 +33,7 @@ const SearchAFriend = (props) => {
 		setNameList(filtered);
 	};
 
-	const foundType = async (input) => {
+	const foundType =  (input) => {
 		const filtered = petsDefault.filter((pet) => {
 			return pet.Type.toLowerCase().includes(input.toLowerCase());
 		});
@@ -49,7 +49,7 @@ const SearchAFriend = (props) => {
 		<>
 			<span style={{ marginLeft: "100px" }}>
 				<Button
-					onClick={handleChange}
+					onClick={	(e) => setChangeType(!changeType)}
 					content={
 						changeType
 							? "Click here to Search by Type"
@@ -58,11 +58,12 @@ const SearchAFriend = (props) => {
 					primary
 				/>
 			</span>
-			{changeType ? (                                 //for the placeholder in SearchBar
-				<SearchBar input={input} onChange={foundName} changeType={changeType} /> 
-			) : ( //receives input from the SearchBar as found in its value(line 17) 
+			{/* {changeType ? (                                 //for the placeholder in SearchBar */}
+				<SearchBar input={input} onChange={changeType ? foundName : foundType}
+				 changeType={changeType} /> 
+			{/* ) : ( //receives input from the SearchBar as found in its value(line 17) 
 				<SearchBar input={input} onChange={foundType} changeType={changeType} />
-			)}
+			)} */}
 			{changeType ? (
 				<ResultSearch nameList={nameList} />
 			) : (
