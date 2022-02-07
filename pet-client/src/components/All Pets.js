@@ -10,7 +10,7 @@ function AllPets() {
 	}, []);
 
 	async function loadPets() {//gets all pets from server
-		const url = "http://localhost:5050/api/pets";
+		const url = "http://localhost:5050/api/pets";//created in 
 		const response = await axios.get(url);
 		console.log(response);
 		setPets(response.data);//inserts the returned data in the pets hook

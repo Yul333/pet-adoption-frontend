@@ -70,7 +70,7 @@ console.log(history)
 				onOpen={() => setOpen(true)}
 				open={open}
 				trigger={
-					<Menu.Item>
+					<Menu.Item header>
 						<Icon name="signup" />
 						Sign Up
 					</Menu.Item>

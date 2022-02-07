@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Button, Card, Grid, Segment } from "semantic-ui-react";
+import { Button, Card, Container, Grid, Segment } from "semantic-ui-react";
 
 function MyPetsList({ pets }) {//data from MyPets comp
 	function mapPetsToItems(petsArr = []) {
@@ -15,6 +15,7 @@ function MyPetsList({ pets }) {//data from MyPets comp
 	}
 	if (!pets || pets.length === 0) {
 		return (
+			<Container text>
 			<div
 				style={{
 					fontSize: "20px",
@@ -35,6 +36,7 @@ function MyPetsList({ pets }) {//data from MyPets comp
 					</Button>
 				</Link>
 			</div>
+			</Container>
 		);
 	}
 	return (

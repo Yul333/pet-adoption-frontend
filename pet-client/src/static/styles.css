@@ -1,19 +1,19 @@
-:root {
+/* :root {
   --bodyBg: #accbec;
   --menuBg: #daa618;
   --progressBar: #1187e7;
-}
+} */
 
-body {
+/* body {
   background: var(--bodyBg);
 }
 
 #menu {
   background: var(--menuBg);
-}
+} */
 
 /* Overrides default styled accordion styles (too much bottom padding) */
-.ui.styled.accordion .content {
+/* .ui.styled.accordion .content {
   margin: 0;
   padding: 0.5em 1em 0.75em !important;
-}
+} */

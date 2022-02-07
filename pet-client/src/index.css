@@ -12,25 +12,18 @@ code {
     monospace;
 } */
 :root {
-  --bodyBg: #e6a2b9;
-  --menuBg: rgb(119, 228, 146);
-  --progressBar: #bedb54;
+  /* --bodyBg: #e6a2b9; */
+  --menuBg: rgb(130, 228, 179);
+  /* --progressBar: #bedb54; */
 }
 
 body {
-  background: var(--bodyBg)
- 
-  
+  background: var(--bodyBg);
 }
 
 #menu {
   background: var(--menuBg);
- 
- 
 }
-
-
-
 
 .ui.styled.accordion .content {
   margin: 0;

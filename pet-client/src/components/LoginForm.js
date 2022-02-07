@@ -52,7 +52,7 @@ function LoginForm() {
 			console.log(token);
 		} catch (error) {
 			setError("Email and password do not match!");
-		}//works only if email is wrong
+		}
 	}
 
 	return (
@@ -67,8 +67,8 @@ function LoginForm() {
 				onOpen={() => setOpen(true)}
 				open={open}
 				trigger={
-					<Menu.Item>
-						<Icon name="sign in" />
+					<Menu.Item header>
+						<Icon header name="sign in" />
 						Login
 					</Menu.Item>
 				}

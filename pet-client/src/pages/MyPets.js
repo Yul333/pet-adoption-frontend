@@ -1,36 +1,34 @@
-import React, { useContext, useEffect, useState } from "react";
-import MyPetsList from "../components/MyPetsList";
-import { setUserTokenContext } from "../context/UserAuth";
-import { getPetsByIds, getUser } from "../lib/api";
+import React, { useContext, useEffect, useState } from 'react';
+import MyPetsList from '../components/MyPetsList';
+import { setUserTokenContext } from '../context/UserAuth';
+import { getPetsByIds, getUser } from '../lib/api';
 
 const MyPets = () => {
-	const [pets, setPets] = useState([]);
+  const [pets, setPets] = useState([]);
 
-	const { user } = useContext(setUserTokenContext);
+  const { user } = useContext(setUserTokenContext);
 
-	useEffect(() => {
-		{
-			user && loadPets();
-		}
-	}, [user]);
+  useEffect(() => {
+    {
+      user && loadPets();
+    }
+  }, [user]);
 
-	async function loadPets() {
-		console.log(user._id);
-		const userFromServer = await getUser(user._id);
-		console.log(userFromServer);
+  async function loadPets() {
+    console.log(user._id);
+    const userFromServer = await getUser(user._id);
+    console.log(userFromServer);
 
-		const userPetsData = await getPetsByIds(userFromServer.myPetsIds);
+    const userPetsData = await getPetsByIds(userFromServer.myPetsIds);
 
-		setPets(userPetsData);
-	}
+    setPets(userPetsData);
+  }
 
-	return (
-		<div>
-			{user && <h1> {`Welcome, ${user.firstName}!`}</h1>}
-
-			<MyPetsList pets={pets} />
-		</div>
-	);
+  return (
+    <div>
+      <MyPetsList pets={pets} />{' '}
+    </div>
+  );
 };
 
 export default MyPets;

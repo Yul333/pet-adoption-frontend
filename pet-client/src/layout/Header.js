@@ -6,6 +6,8 @@ import {
 } from "react-router-dom";
 import Account from "../components/Account";
 import AllPets from "../components/All Pets";
+import CatsResult from "../components/PetSearch/CatsResult";
+import DogsResult from "../components/PetSearch/DogsResult";
 import SearchAFriend from "../components/PetSearch/SearchAFriend";
 import SignUp from "../components/SignUp";
 import UserAuth from "../context/UserAuth";
@@ -29,6 +31,12 @@ function Header() {
 					</Route>
 					<Route path="/SearchAFriend" exact>
 						<SearchAFriend />
+					</Route>
+					<Route path="/Dogs" exact>
+						<DogsResult />
+					</Route>
+					<Route path="/Cats" exact>
+						<CatsResult />
 					</Route>
 					<Route path="/AllPets" exact>
 						<AllPets />

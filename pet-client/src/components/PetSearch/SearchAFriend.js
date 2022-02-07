@@ -1,76 +1,80 @@
-import SearchBar from "../PetSearch/SearchBar";
-import ResultSearchType from "../PetSearch/ResultSearchType";
-import React, { useState, useEffect } from "react";
-import ResultSearch from "../PetSearch/ResultSearch";
-import { Button } from "semantic-ui-react";
+import SearchBar from '../PetSearch/SearchBar';
+import ResultSearchType from '../PetSearch/ResultSearchType';
+import React, { useState, useEffect } from 'react';
+import ResultSearch from '../PetSearch/ResultSearch';
+import { Button, Grid } from 'semantic-ui-react';
 
 const SearchAFriend = (props) => {
-	const [input, setInput] = useState("");
-	const [petsDefault, setPetsDefault] = useState([]);
-	const [nameList, setNameList] = useState();
-	const [typeList, setTypeList] = useState();
-	const [changeType, setChangeType] = useState(true);
+  const [input, setInput] = useState('');
+  const [petsDefault, setPetsDefault] = useState([]);
+  const [nameList, setNameList] = useState();
+  const [isSearchByNameOrType, setIsSearchByNameOrType] = useState(true);
+  const [error, setError] = useState('');
 
-	// function handleChange() {
-	// 	setChangeType(!changeType); //originally true. '!'-toggles by clicking between name/type   
-	// }
-// const change = () => setChangeType(!changeType)
-	const fetchData = async () => {
-		return await fetch("http://localhost:5050/api/pets")
-			.then((response) => response.json())
-			.then((data) => {
-				// setNameList(data);
-				setPetsDefault(data);
-				console.log(data);
-			}).catch();
-	};
+  const fetchData = async () => {
+    setError('');
+    return await fetch('http://localhost:5050/api/pets')
+      .then((response) => response.json())
+      .then((data) => {
+      //  throw "yulia"
 
-	const foundName =  (input) => {
-		const filtered = petsDefault.filter((pet) => {
-			return pet.Name.toLowerCase().includes(input.toLowerCase());
-		});
-		setInput(input);
-		setNameList(filtered);
-	};
+        setPetsDefault(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+        setError('Somethings wrong....'+error);
+      });
+  };
 
-	const foundType =  (input) => {
-		const filtered = petsDefault.filter((pet) => {
-			return pet.Type.toLowerCase().includes(input.toLowerCase());
-		});
-		setInput(input);
-		setTypeList(filtered);
-	};
+  const foundName = (input) => {
+    const filtered = petsDefault.filter((pet) => {
+      return pet.Name.toLowerCase().includes(input.toLowerCase());
+    });
+    setInput(input);
+    setNameList(filtered);
+  };
 
-	useEffect(() => {
-		fetchData();
-	}, []);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-	return (
-		<>
-			<span style={{ marginLeft: "100px" }}>
-				<Button
-					onClick={	(e) => setChangeType(!changeType)}
-					content={
-						changeType
-							? "Click here to Search by Type"
-							: "Click here to Search by Name"
-					}//if the changeType btn is appearing, then the search is by name and vice versa 
-					primary
-				/>
-			</span>
-			{/* {changeType ? (                                 //for the placeholder in SearchBar */}
-				<SearchBar input={input} onChange={changeType ? foundName : foundType}
-				 changeType={changeType} /> 
-			{/* ) : ( //receives input from the SearchBar as found in its value(line 17) 
-				<SearchBar input={input} onChange={foundType} changeType={changeType} />
-			)} */}
-			{changeType ? (
-				<ResultSearch nameList={nameList} />
-			) : (
-				<ResultSearchType typeList={typeList} />
-			)}
-		</>
-	);
+  if (error) {
+    return <div>{error}</div>;
+  }
+  return (
+    <>
+      <Grid centered columns={2}>
+        <Grid.Column>
+          <Button
+            onClick={(e) => setIsSearchByNameOrType(!isSearchByNameOrType)}
+            content={
+              isSearchByNameOrType
+                ? 'Click here to Search by Type'
+                : 'Click here to Search by Name'
+            }
+            primary
+          />
+        </Grid.Column>
+        <Grid.Row centered columns={2}>
+          <Grid.Column>
+            {isSearchByNameOrType ? (
+              <>
+                <SearchBar
+                  input={input}
+                  onChange={foundName}
+                  isSearchByNameOrType={isSearchByNameOrType}
+                />
+                <ResultSearch nameList={nameList} />
+              </>
+            ) : (
+              <ResultSearchType />
+            )}
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </>
+  );
 };
 
 export default SearchAFriend;
