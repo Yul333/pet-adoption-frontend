@@ -1,30 +1,10 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { Button, Grid, Header, Image, Segment } from 'semantic-ui-react';
-import { setUserTokenContext } from '../context/UserAuth';
-import { getUser, login } from '../lib/api';
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
+import { Button, Grid, Header, Image, Segment } from 'semantic-ui-react'
+import { setUserTokenContext } from '../context/UserAuth'
 
 function Home() {
-  const { user } = useContext(setUserTokenContext);
-
-	// const [EditedName, setEditedName] = useState('')
-	// useEffect(() => {
-  //   {
-  //     user && NewName();
-  //   }
-  // }, [user]);
-
-	// async function NewName() {
-  //   console.log(user.firstName);
-	//   const userFromServer = await getUser(user.firstName);
-  //   console.log(userFromServer);
-
-  //   const userNewName = await login(userFromServer.firstName);
-
-  //   setEditedName(userNewName);
-  // }
+  const { user } = useContext(setUserTokenContext)
 
   return (
     <>
@@ -66,7 +46,7 @@ function Home() {
         </Grid>
       </Segment>
     </>
-  );
+  )
 }
 
-export default Home;
+export default Home

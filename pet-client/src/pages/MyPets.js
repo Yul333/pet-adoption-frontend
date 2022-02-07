@@ -1,34 +1,32 @@
-import React, { useContext, useEffect, useState } from 'react';
-import MyPetsList from '../components/MyPetsList';
-import { setUserTokenContext } from '../context/UserAuth';
-import { getPetsByIds, getUser } from '../lib/api';
+/* eslint-disable no-lone-blocks */
+import React, { useContext, useEffect, useState } from 'react'
+import MyPetsList from '../components/MyPetsList'
+import { setUserTokenContext } from '../context/UserAuth'
+import { getPetsByIds, getUser } from '../lib/api'
 
 const MyPets = () => {
-  const [pets, setPets] = useState([]);
-
-  const { user } = useContext(setUserTokenContext);
+  const [pets, setPets] = useState([])
+  const { user } = useContext(setUserTokenContext)
 
   useEffect(() => {
     {
-      user && loadPets();
+      user && loadPets()
     }
-  }, [user]);
+  }, [user])
 
   async function loadPets() {
-    console.log(user._id);
-    const userFromServer = await getUser(user._id);
-    console.log(userFromServer);
-
-    const userPetsData = await getPetsByIds(userFromServer.myPetsIds);
-
-    setPets(userPetsData);
+    console.log(user._id)
+    const userFromServer = await getUser(user._id)
+    console.log(userFromServer)
+    const userPetsData = await getPetsByIds(userFromServer.myPetsIds)
+    setPets(userPetsData)
   }
 
   return (
     <div>
       <MyPetsList pets={pets} />{' '}
     </div>
-  );
-};
+  )
+}
 
-export default MyPets;
+export default MyPets

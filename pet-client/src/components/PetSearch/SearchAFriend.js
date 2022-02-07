@@ -1,46 +1,45 @@
-import SearchBar from '../PetSearch/SearchBar';
-import ResultSearchType from '../PetSearch/ResultSearchType';
-import React, { useState, useEffect } from 'react';
-import ResultSearch from '../PetSearch/ResultSearch';
-import { Button, Grid } from 'semantic-ui-react';
+import SearchBar from '../PetSearch/SearchBar'
+import ResultSearchType from '../PetSearch/ResultSearchType'
+import React, { useState, useEffect } from 'react'
+import ResultSearch from '../PetSearch/ResultSearch'
+import { Button, Grid } from 'semantic-ui-react'
 
 const SearchAFriend = (props) => {
-  const [input, setInput] = useState('');
-  const [petsDefault, setPetsDefault] = useState([]);
-  const [nameList, setNameList] = useState();
-  const [isSearchByNameOrType, setIsSearchByNameOrType] = useState(true);
-  const [error, setError] = useState('');
+  const [input, setInput] = useState('')
+  const [petsDefault, setPetsDefault] = useState([])
+  const [nameList, setNameList] = useState()
+  const [isSearchByNameOrType, setIsSearchByNameOrType] = useState(true)
+  const [error, setError] = useState('')
 
   const fetchData = async () => {
-    setError('');
+    setError('')
     return await fetch('http://localhost:5050/api/pets')
       .then((response) => response.json())
       .then((data) => {
-      //  throw "yulia"
 
-        setPetsDefault(data);
-        console.log(data);
+        setPetsDefault(data)
+        console.log(data)
       })
       .catch((error) => {
-        console.log(error);
-        setError('Somethings wrong....'+error);
-      });
-  };
+        console.log(error)
+        setError('Somethings wrong....' + error)
+      })
+  }
 
   const foundName = (input) => {
     const filtered = petsDefault.filter((pet) => {
-      return pet.Name.toLowerCase().includes(input.toLowerCase());
-    });
-    setInput(input);
-    setNameList(filtered);
-  };
+      return pet.Name.toLowerCase().includes(input.toLowerCase())
+    })
+    setInput(input)
+    setNameList(filtered)
+  }
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   if (error) {
-    return <div>{error}</div>;
+    return <div>{error}</div>
   }
   return (
     <>
@@ -74,7 +73,7 @@ const SearchAFriend = (props) => {
         </Grid.Row>
       </Grid>
     </>
-  );
-};
+  )
+}
 
-export default SearchAFriend;
+export default SearchAFriend

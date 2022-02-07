@@ -1,12 +1,11 @@
-import { Container } from 'semantic-ui-react';
-import '../App.css';
-import Header from './Header';
+import { Container } from 'semantic-ui-react'
+import '../App.css'
+import Header from './Header'
 
 function Layout({ children }) {
   return (
     <>
       <Header />
-
       <link rel='stylesheet' href='../App.css' />
       <link
         rel='stylesheet'
@@ -15,7 +14,7 @@ function Layout({ children }) {
       <title> Pets Adoption </title>
       <Container>{children}</Container>
     </>
-  );
+  )
 }
 
-export default Layout;
+export default Layout
