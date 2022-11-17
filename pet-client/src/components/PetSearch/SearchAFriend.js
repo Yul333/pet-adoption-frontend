@@ -34,6 +34,7 @@ const SearchAFriend = (props) => {
     setNameList(filtered)
   }
 
+  //return data that is filtered in ResultSearchByName function
   useEffect(() => {
     fetchData()
   }, [])

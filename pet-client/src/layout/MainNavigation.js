@@ -14,7 +14,6 @@ function MainNavigation(props) {
   }
   // accepts the returned value and returns the current context value as it given by the provider
   const { user } = useContext(setUserTokenContext)
-
   return (
     <Menu secondary stackable id='menu'>
       <Container>

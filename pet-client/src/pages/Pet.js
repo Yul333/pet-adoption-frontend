@@ -2,6 +2,7 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import PetSummary from '../components/Pet/PetSummary'
 
+//returns pets info from server
 const Pet = () => {
   const [petId, setPetId] = useState([])
   let urlParams = new URLSearchParams(window.location.search)
@@ -9,13 +10,12 @@ const Pet = () => {
   // loads pets once (compDidMount)
   useEffect(() => {
     loadPets()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   async function loadPets() {
     //inserts id at the endpoint of the server
     const url = `http://localhost:5050/api/pets/${id}`
-    const response = await axios.get(url) // get pet
+    const response = await axios.get(url) //get pet
     console.log(response)
     //extracts the pet from obj that returned from server
     setPetId(response.data.pet)

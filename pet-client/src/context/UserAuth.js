@@ -4,12 +4,12 @@ import localforage from "localforage";
 export const setUserTokenContext = createContext(null); //creates and resets context
 
 export const useAuth = () => {  //allows every comp to approach auth and to rerender if changed
-	return useContext(setUserTokenContext); //Hook that uses the created context and calls it using the useAuth
+	return useContext(setUserTokenContext); //Hook that uses the created context and calls it using the useAuth.
 }; 
 function UserAuth(props) {
 	const [token, setToken] = useState(null); //Hooks for changing the inner state of comp
 	const [user, setUser] = useState(null);
-	useEffect(() => {
+	useEffect(() => { //gets the token and user from forage and updates them
 		localforage.getItem("token", (error, value) => {
 			if (error) {
 				setToken(null);

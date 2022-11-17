@@ -8,6 +8,7 @@ import Account from '../components/Account'
 import AllPets from '../components/All Pets'
 import CatsResult from '../components/PetSearch/CatsResult'
 import DogsResult from '../components/PetSearch/DogsResult'
+import ResultByType from '../components/PetSearch/ResultByType'
 import SearchAFriend from '../components/PetSearch/SearchAFriend'
 import SignUp from '../components/SignUp'
 import UserAuth from '../context/UserAuth'
@@ -33,10 +34,10 @@ function Header() {
             <SearchAFriend />
           </Route>
           <Route path='/Dogs' exact>
-            <DogsResult />
+            <ResultByType petType='Dog'/>
           </Route>
           <Route path='/Cats' exact>
-            <CatsResult />
+            <ResultByType petType='Cat' />
           </Route>
           <Route path='/AllPets' exact>
             <AllPets />

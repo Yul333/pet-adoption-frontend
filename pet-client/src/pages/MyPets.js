@@ -9,7 +9,7 @@ const MyPets = () => {
   const { user } = useContext(setUserTokenContext)
 
   useEffect(() => {
-    {
+    {//loads pets if user is logged in
       user && loadPets()
     }
   }, [user])
