@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import localforage from "localforage";
 
 export const setUserTokenContext = createContext(null); //creates and resets context
-
+//delete useAuth
 export const useAuth = () => {  //allows every comp to approach auth and to rerender if changed
 	return useContext(setUserTokenContext); //Hook that uses the created context and calls it using the useAuth.
 }; 
